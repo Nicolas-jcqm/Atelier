@@ -1,0 +1,7 @@
+# Editors
+.idea
+
+db.ini
+/vendor
+composer.lock
+vendor
