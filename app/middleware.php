@@ -8,13 +8,19 @@ $app->add(function ($request, $response, $next) {
     return $next($request, $response);
 });
 
-$middleware_no_need_co = function ($request, $response, $next) {
-    if(isset($_SESSION['creatorCo'])){
-        //redirect vers home co
-    }else
-    return $next($request, $response);
+$middleware_need_co = function ($request, $response, $next) {
+    if(!isset($_SESSION['creatorCo'])){
+        return $response->withRedirect($this->router->pathFor('signin'));
+    }else {
+        return $next($request, $response);
+    }
 
 };
-$middleware_need_co=function ($request, $response, $next) {
+$middleware_need_no_co=function ($request, $response, $next) {
+    if(isset($_SESSION['creatorCo'])){
+        return $response->withRedirect($this->router->pathFor('homeCo'));
+    }else {
+        return $next($request, $response);
 
+    }
 };
