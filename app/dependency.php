@@ -77,25 +77,15 @@ $container['activation'] = function ($c) {
 # -----------------------------------------------------------------------------
 
 $container['App\Controllers\HomeController'] = function ($c) {
-    return new App\Controllers\HomeController(
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\HomeRepository')
-    );
+    return new App\Controllers\HomeController($c);
 };
 
 $container['App\Controllers\UserController'] = function ($c) {
-    return new App\Controllers\UserController(
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\UserRepository')
-    );
+    return new App\Controllers\UserController($c);
 };
 
 $container['App\Controllers\ListeController'] = function ($c) {
-    return new App\Controllers\ListeController(
-        $c->get('view')
-    );
+    return new App\Controllers\ListeController($c);
 };
 
 # -----------------------------------------------------------------------------
