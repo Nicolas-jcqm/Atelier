@@ -1,0 +1,14 @@
+
+@mixin alert($v-wid, $v-hei, $v-dis, $v-col, $v-pad, $v-fon){
+  box-sizing: border-box;
+  color: $v-col;
+  width: $v-wid;
+  height: $v-hei;
+  font-weight: $v-fon;
+  display: $v-dis;
+  padding: $v-pad;
+}
+
+@mixin alert-bgcolor($v-bg, $v-bg-scolor) {
+  background-image: linear-gradient($v-bg, $v-bg-scolor);
+}

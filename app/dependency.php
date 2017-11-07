@@ -83,6 +83,13 @@ $container['App\Controllers\HomeController'] = function ($c) {
 $container['App\Controllers\UserController'] = function ($c) {
     return new App\Controllers\UserController($c);
 };
+
+$container['App\Controllers\ListeController'] = function ($c) {
+    return new App\Controllers\ListeController(
+        $c->get('view')
+    );
+};
+
 # -----------------------------------------------------------------------------
 # Factories Models
 # -----------------------------------------------------------------------------

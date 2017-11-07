@@ -1,0 +1,38 @@
+@mixin background-color($color) {
+  background-color: $color;
+}
+
+@mixin make-col-span($size, $gridcolumns) {
+  @for $i from 1 through $gridcolumns{
+    .col-span-#{$i}{
+      flex-basis: ($size)*($i / $gridcolumns);
+    }
+  }
+}
+
+@mixin make-col-offset($size, $gridcolumns) {
+  @for $i from 1 through $gridcolumns{
+    .col-offset-#{$i}{
+        margin-left: ($size)*($i / $gridcolumns);
+    }
+  }
+}
+
+@mixin make-row() {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@mixin make-col() {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box;
+}
+
+@mixin make-row-wide-fit() {
+  margin-left: -10px;
+  margin-right: -10px;
+}
