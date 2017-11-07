@@ -30,7 +30,7 @@ final class UserController
     public function signin(Request $request, Response $response, $args)
     {
         $url_form = $this->router->pathFor('signin');
-        return $this->view->render($response, 'signin.twig', ["url_form"=>$url_form]);
+        return $this->view->render($response, 'signin.twig', ["url_form"=>$url_form,'erreurs'=>$erreur=[]]);
     }
 
     public function validation_signup(Request $request, Response $response, $args){
@@ -94,16 +94,21 @@ final class UserController
             }
 
 
+        }else{
+            $erreurSurvenue="Désolé, une erreur est survenue";
+            array_push($erreurArray,$erreurSurvenue);
+            $url_form = $this->router->pathFor('signup');
+            return $this->view->render($response, 'signup.twig', ["url_form"=>$url_form,'erreurs'=>$erreurArray]);
         }
     }
 
     public function validation_signin(Request $request, Response $response, $args){
 
         //Les données de mon body soit le $_POST ici
+        $url_form=$this->router->pathFor('signin');
         $parsedBody = $request;
         $errorArray=array();
         if(isset($_POST) && $_POST['envoi'] === "Connexion"){
-            echo 'lol';
             if (Creator::where('mail', '=', $_POST['mail'])->exists()){
                 $creator = Creator::where('mail', '=', $_POST['mail'])->first();
                 $password= $creator->password;
@@ -116,15 +121,21 @@ final class UserController
                 else{
                     $erreurMpdExistPas="Votre mot de passe est incorrect, veuillez essayer à nouveau  ";
                     array_push($errorArray,$erreurMpdExistPas);
+                    return $this->view->render($response, 'signin.twig', ["url_form"=>$url_form,'erreurs'=>$errorArray]);
+
                 }
 
             }else{
                 $erreurMailExistPas="L'email n'existe pas";
                 array_push($errorArray,$erreurMailExistPas);
+                return $this->view->render($response, 'signin.twig', ["url_form"=>$url_form,'erreurs'=>$errorArray]);
+
             }
         }else{
             $erreurMailExistPas="Une erreur est survenue ;) ";
             array_push($errorArray,$erreurMailExistPas);
+            return $this->view->render($response, 'signin.twig', ["url_form"=>$url_form,'erreurs'=>$errorArray]);
+
         }
     }
 
@@ -133,6 +144,10 @@ final class UserController
         return $this->view->render($response, 'homeCo.twig', ["creator"=>$creator]);
     }
 
+    public function disconnect(Request $request, Response $response, $args){
+        unset($_SESSION['creatorCo']);
+        return $response->withRedirect($this->router->pathFor('homepage'));
+    }
     /*
     public signUpCreator(equest $request, Response $response, $args){
         return $this->view->render()

@@ -19,6 +19,14 @@
     <div>
         <input type="submit" name="envoi" value="Connexion">
     </div>
+    {%  if erreurs|length > 0 %}
+        <div>
+            {% for error in erreurs %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+
+    {% endif %}
 
 </form>
 </body>

@@ -26,8 +26,6 @@ final class HomeController
     {
         $this->logger->info("Home page action dispatched");
 
-		    echo $_SESSION['creatorCo'];
-        $name = Creator::find($_SESSION['creatorCo'])->name;
         $this->view->render($response, 'main.twig');
 
 		
