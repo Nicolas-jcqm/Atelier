@@ -1,0 +1,208 @@
+@import "variables";
+
+$text-left-text-align: left !default;
+$text-right-text-align: right !default;
+$text-center-text-align: center !default;
+$text-justify-text-align: justify !default;
+$text-lowercase-text-transform: lowercase !default;
+$text-uppercase-text-transform: uppercase !default;
+
+$h-color: black !default;
+$h-ffamily: 'Open Sans', Verdana, sans-serif !default;
+$h1-fsize: 2em !default;
+$h2-fsize: 1.8em !default;
+$h3-fsize: 1.6em !default;
+$h4-fsize: 1.4em !default;
+$h5-fsize: 1.2em !default;
+$h6-fsize: 1em !default;
+$small-color: grey !default;
+$small-fsize: 0.8em !default;
+$p-line-height: inherit !default;
+
+$mark-bcg-colr: yellow !default;
+$mark-color: black !default;
+$del-text-decoration: line-through !default;
+$ins-text-decoration: underline !default;
+$ul-text-decoration: underline !default;
+$strong-fweight: bold !default;
+$em-fstyle: italic !default;
+
+$abbr-text-decoration: underline !default;
+$abbr-text-decoration-style: dotted !default;
+
+$pre-padding:  0.5em 10px !default;
+$pre-margin: 1.5em 10px !default;
+$pre-word-wrap: break-word !default;
+$pre-white-space: pre-wrap !default;
+
+$code-bgcolor: #1B2426 !default;
+$code-border: 1px solid #ccc !default;
+$code-color: white !default;
+$code-display: block !default;
+$code-padding: 0.5em 10px !default;
+$code-margin: 1.5em 10px !default;
+
+$blockquote-bgcolor: #f9f9f9 !default;
+$blockquote-border: 1px solid #ccc !default;
+$blockquote-border-left: 10px solid #ccc !default;
+$blockquote-margin: 1.5em 10px !default;
+$blockquote-padding: 0.5em 10px !default;
+$blockquote-quotes: "\201C""\201D""\2018""\2019" !default;
+$blockquote-fstyle: italic !default;
+$blockquote-b-color: #ccc !default;
+$blockquote-b-content: open-quote !default;
+$blockquote-b-fsize: 4em !default;
+$blockquote-b-line-height: 0.1em !default;
+$blockquote-b-margin-right: 0.25em !default;
+$blockquote-b-vertical-align: -0.4em !default;
+$blockquote-p-display: inline !default;
+
+$kbd-bgcolor: #f4f7f8 !default;
+$kbd-border-radius: 3px !default;
+$kbd-border: 1px solid #b4b4b4 !default;
+$kbd-box-shadow:  0 1px 1px rgba(0,0,0,.2),0 2px 0 0 rgba(255,255,255,.7) inset !default;
+$kbd-display: inline-block !default;
+$kbd-ffamily: Consolas,"Liberation Mono",Courier,monospace !default;
+$kbd-fsize: .85em !default;
+$kbd-fweight : 600 !default;
+$kbd-opacity: .8 !default;
+$kbd-line-height: inherit !default;
+$kbd-padding: 2px 4px !default;
+$kbd-white-space: nowrap !default;
+
+
+//text
+h1,h2,h3,h4,h5,h6{
+  color: $h-color;
+  font-family: $h-ffamily;
+}
+
+h1{
+	font-size: $h1-fsize;
+}
+h2{
+	font-size: $h2-fsize;
+}
+h3{
+	font-size: $h3-fsize;
+}
+h4{
+	font-size: $h4-fsize;
+}
+h5{
+	font-size: $h5-fsize;
+}
+h6{
+	font-size: $h6-fsize;
+}
+small{
+	font-size: $small-fsize;
+	color: $small-color;
+}
+.small{
+	font-size: $small-fsize;
+	color: $small-color;
+}
+.text-justify{
+	text-align: $text-justify-text-align;
+}
+.text-lowercase{
+	text-transform: $text-lowercase-text-transform;
+}
+.text-uppercase{
+	text-transform: $text-uppercase-text-transform;
+}
+.text-left{
+	text-align: $text-left-text-align;
+}
+.text-right{
+	text-align: $text-right-text-align;
+}
+.text-center{
+	text-align: $text-center-text-align;
+}
+p {
+	line-height: $p-line-height;
+}
+
+//typo
+mark{
+	background-color: $mark-bcg-colr;
+	color: $mark-color;
+}
+del{
+	text-decoration: $del-text-decoration;
+}
+ins{
+	text-decoration: $ins-text-decoration;
+}
+u{
+	text-decoration: $ul-text-decoration;
+}
+strong{
+	font-weight: $strong-fweight;
+}
+em{
+	font-style: $em-fstyle;
+}
+abbr{
+	text-decoration: $abbr-text-decoration;
+	text-decoration-style: $abbr-text-decoration-style;
+}
+
+//quote
+blockquote {
+  background-color: $blockquote-bgcolor;
+	border: $blockquote-border;
+  border-left: $blockquote-border-left;
+  margin: $blockquote-margin;
+  padding: $blockquote-padding;
+  quotes: $blockquote-quotes;
+	font-style: $blockquote-fstyle;
+}
+blockquote::before {
+  color: $blockquote-b-color;
+  content: $blockquote-b-content;
+  font-size: $blockquote-b-fsize;
+  line-height: $blockquote-b-line-height;
+  margin-right: $blockquote-b-margin-right;
+  vertical-align: $blockquote-b-vertical-align;
+}
+blockquote p {
+  display: $blockquote-p-display;
+}
+
+//code
+code {
+	background-color: $code-bgcolor;
+	border: $code-border;
+	color: $code-color;
+	display: $code-display;
+	padding: $code-padding;
+	margin: $code-margin;
+}
+
+//pre
+pre{
+	white-space: $pre-white-space;
+	word-wrap: $pre-word-wrap;
+	margin: $pre-margin;
+	padding: $pre-padding;
+}
+
+//kbd
+kbd{
+	padding: $kbd-padding;
+	white-space: $kbd-white-space;
+	line-height: $kbd-line-height;
+	opacity: $kbd-opacity;
+	font-weight: $kbd-fweight;
+	font-size: $kbd-fsize;
+	font-family: $kbd-ffamily;
+	display: $kbd-display;
+	box-shadow: $kbd-box-shadow;
+	border: $kbd-border;
+	border-radius: $kbd-border-radius;
+	background-color: $kbd-bgcolor;
+}
+ 

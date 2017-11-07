@@ -1,0 +1,61 @@
+@import "variables";
+
+//----- table -----\\
+$table-margin: 10px !default;
+$table-width: 89% !default;
+
+
+//----- th - td -----\\
+$table-td-border-color: #e5e5e5 !default;
+$table-td-border-type: solid !default;
+$table-td-border-size: 2px !default;
+$table-td-padding: 12px !default;
+$table-th-border-color: #e5e5e5 !default;
+$table-th-border-type: solid !default;
+$table-th-border-size: 2px !default;
+$table-th-text-align: center !default;
+$table-th-padding: 12px !default;
+$table-th-font-weight: bold !default;
+
+//----- table and child color -----\\
+$table-n-child-bgcolor:RosyBrown !default;
+$table-bgcolor: Silver !default;
+
+//----- table selected -----\\
+$table-selected-bgcolor: #5d5d5d !default;
+$table-selected-color: white !default;
+
+//----- table hover -----\\
+$table-td-hover-bgcolor: #5a5a5a !default;
+$table-td-hover-color: black !default;
+
+table{
+  margin-bottom: $table-margin;
+	box-sizing: border-box;
+  background-color: $table-bgcolor;
+	width: $table-width;
+	margin-top: $table-margin;
+
+  tr, td{
+    border: $table-td-border-color $table-td-border-type $table-td-border-size;
+    padding: $table-td-padding;
+  }
+  th{
+    border: $table-th-border-color $table-th-border-size $table-th-border-type;
+    padding: $table-th-padding;
+    font-weight: $table-th-font-weight;
+  	text-align: $table-th-text-align;
+  }
+}
+.table-hover td:hover{
+  background-color: $table-td-hover-bgcolor;
+  color: $table-td-hover-color;
+}
+.table-striped tr:nth-child(2n+2){
+  background-color: $table-n-child-bgcolor;
+}
+.table-selected{
+  color: $table-selected-color;
+	background-color: $table-selected-bgcolor;
+}
+

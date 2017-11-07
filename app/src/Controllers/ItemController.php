@@ -6,7 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-final class HomeController
+final class ItemController
 {
     private $view;
     private $logger;
@@ -19,12 +19,7 @@ final class HomeController
         $this->model = $user;
     }
 
-    public function dispatch(Request $request, Response $response, $args)
-    {
-        $this->logger->info("Home page action dispatched");
-		
-        $this->view->render($response, 'main.twig');
-		
-        return $response;
+    public function addItem($title, $desc, $price, $url , $picture){
+        
     }
 }
