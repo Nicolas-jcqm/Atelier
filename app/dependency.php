@@ -92,8 +92,8 @@ $container['App\Controllers\ListeController'] = function ($c) {
 # Factories Models
 # -----------------------------------------------------------------------------
 
-$container['Model\User'] = function ($c) {
-    return new App\Models\User;
+$container['Model\Creator'] = function ($c) {
+    return new App\Models\Creator;
 };
 
 # -----------------------------------------------------------------------------
@@ -102,13 +102,13 @@ $container['Model\User'] = function ($c) {
 
 $container['App\Repositories\HomeRepository'] = function ($c) {
 	return new App\Repositories\HomeRepository(
-        $c->get('Model\User')
+        $c->get('Model\Creator')
 	);
 };
 
 $container['App\Repositories\UserRepository'] = function ($c) {
 	return new App\Repositories\UserRepository(
-        $c->get('Model\User')
+        $c->get('Model\Creator')
 	);
 };
 
