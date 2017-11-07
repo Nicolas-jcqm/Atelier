@@ -1,0 +1,145 @@
+//Button
+//Variable button default
+
+@mixin button-btn($color, $background, $font-size, $padding, $margin-left, $margin-right, $border-radius, $acti-background) {
+  width: auto;
+  text-align: center;
+  box-sizing: border-box;
+
+  color : $color;
+  background-color: $background;
+  font-size: $font-size;
+  padding: $padding;
+  margin-right:$margin-right;
+  margin-left:$margin-left;
+  border-radius:$b-border-radius;
+
+  &:active{
+      background-color: $acti-background;
+  }
+}
+
+//Création de button avec backgroud et background active
+@mixin button-color-active($color, $active-color) {
+  background-color: $color;
+
+  &:active{
+    background-color: $active-color;
+  }
+}
+
+@mixin button-color-active-color($color, $active-background, $active-color) {
+    background-color: $color;
+
+    &:active{
+      background-color: $active-background;
+      color: $active-color;
+    }
+}
+
+//Création de button en fonction de la couleur, background, border
+@mixin button-variant ($color, $background, $border){
+
+
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+
+  $focus-backgroud: darken($background, 18%);
+  $focus-border: darken($border, 28%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:hover{
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+  }
+  &:focus {
+    color: $color;
+    background-color: $focus-backgroud;
+    border-color: $focus-border;
+
+  }
+
+  &:active {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+  }
+
+}
+
+//Création du button en fonction de la color avec un background par défault
+@mixin button-color($color) {
+
+  $active-background: darken($color, 10%);
+  $active-border: darken($color, 12%);
+
+  $focus-backgroud: darken($color, 18%);
+  $focus-border: darken($color, 28%);
+
+  color: $color;
+  background-color: $b-default;
+  border-color: $color;
+
+  &:hover {
+    color: $b-color-default;
+    background-color: $active-background;
+    border-color: $color;
+
+  }
+
+  &:focus {
+    color: $color;
+    background-color: $focus-backgroud;
+    border-color: $focus-border;
+
+  }
+
+  &:active {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+  }
+}
+
+//Création du button
+@mixin button-size ($padding_x, $padding_y, $font-size, $border-radius, $line-height){
+  line-height: $line-height;
+  padding: $padding_y $padding_x;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
+
+@mixin button-lg($width) {
+  width: $width;
+  
+}
+
+@mixin button-fancy($ft, $talign, $color, $tshadow, $boxshadow, $colorHover, $colorActive, $boxshadowActive) {
+  font-family: $ft;
+  text-align: $talign;
+  background: $color;
+  text-shadow: $tshadow;
+  box-shadow: $boxshadow;
+
+  &:hover {
+    background: $colorHover;
+  }
+
+  &:active{
+    background: $colorActive;
+    box-shadow: $boxshadowActive;
+  }
+}
+
+@mixin button-flat($border, $border-radius, $margin-left){
+  border: $border;
+  border-radius: $border-radius;
+  margin-left: $margin-left;
+}

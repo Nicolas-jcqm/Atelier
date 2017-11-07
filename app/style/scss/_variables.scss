@@ -1,0 +1,245 @@
+//Variables
+
+//--------------- Alert ---------------\\
+
+	// $v-alert-display: block;
+	// $v-alert-width: 100%;
+	// $v-alert-height: auto;
+	// $v-alert-font-weight: bold;
+	// $v-alert-padding: 1.5em;
+	// $v-alert-color: white;
+	// $v-alert-bg-secondcolor: #555;
+
+//================== Button ==================
+
+/* Color */
+// $b-default: #b3b3b3;
+// $b-default-active: #8c8c8c;
+// $b-color-default: white;
+// $b-border-radius: 8px 8px 8px 8px;
+//
+// $b-primary: #b3b3b3;
+// $b-primary-active:#337ab7;
+//
+// $b-secondary: #1a1aff;
+// $b-secondary-active: #0000b3;
+//
+// $b-success: #5cb85c;
+// $b-success-active: #3e8e3e;
+//
+// $b-info:    #5bc0de;
+// $b-info-active:  #279bbe;
+//
+// $b-warning: #f0ad4e;
+// $b-warning-active:  #d38312;
+//
+// $b-danger:  #d9534f;
+// $b-danger-active:  #a72925;
+//
+// $b-link:  #9900ff;
+// $b-link-active: #6b00b3;
+//
+// $b-fanzy-font: Arial,sans-serif;
+// $b-fanzy-backgrd-hover: linear-gradient( #777, #333);
+// $b-fanzy-bckgrd-active: linear-gradient( #555, #2C2C2C);
+//
+// /* Font Size */
+// $fz-default: 16px;
+// $fz-small: 0.875rem;
+// $fz-large: 1.25rem;
+//
+// /* Padding */
+// $pdg-default: 10px 50px;
+//
+// $pdg-small-y:0.5rem;
+// $pdg-small-x:0.25rem;
+// $pdg-small:$pdg-small-x $pdg-small-y;
+//
+// $pdg-large-y: 1.5rem;
+// $pdg-large-x: 0.75rem;
+// $pdg-large: $pdg-large-x $pdg-large-y;
+//
+// /* Margin */
+// $margin-left: 2%;
+// $margin-right: 2%;
+//
+// /* Border radius */
+// $border-radius-small: 0.2rem;
+// $border-radius-large: 0.3rem;
+// $border-radius-flat: 0px;
+//
+// /* line-height */
+// $line-height-small: 0.1;
+// $line-height-large: 0,6;
+//
+// /* button fancy */
+// $backgroud-fancy: linear-gradient( #555, $b-default);
+// $text-shadow-fancy: 0px 1px 0px rgba( 255, 255, 255, 0.2);
+// $box-shadow-fancy: 0 0 5px rgba( 0, 0, 0, 0.5),
+//           0 -1px 0 rgba( 255, 255, 255, 0.4);
+// $box-shadow-fancy-active:  1px 1px 10px black inset,
+//             0 1px 0 rgba( 255, 255, 255, 0.4);
+
+
+//================== Composant ==================
+
+// //Color Default
+// $color-default-black: black;
+// $color-default-white: white;
+// $color-default-header: grey;
+// $color-default-body: Cornsilk;
+//
+// //Jombotron
+// $jombotron-background-color: #d9d9d9;
+// $header-border-color: #b3b3b3;
+//
+//
+// // breadcrumb
+// $breadcrumb-padding-vertical:   8px;
+// $breadcrumb-padding-horizontal: 15px;
+// //** Breadcrumb background color
+// $breadcrumb-bg:                 #428bca;
+// //** Breadcrumb text color
+// $breadcrumb-color:              white;
+// //** Text color of current page in the breadcrumb
+// $breadcrumb-separator-color:  $color-default-black;
+// //** Textual separator for between breadcrumb elements
+// $breadcrumb-separator:          "/";
+// $font-size-base:          14px;
+// $line-height-base:        1.4; // 20/14
+// $border-radius-base:        4px;
+// $line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+//
+// //Pagination
+// $pagi-color:  $color-default-black;
+// $pagi-padding: 8px 16px;
+// $pagi-border-radius: 60px;
+// $pagi-border: 1px solid #ddd;
+// $pagi-margin: 0 4px;
+// $pagi-bck-color: #999999;
+// $pagi-active-color: $color-default-white;
+
+
+//================== Grid ==================
+
+// $gutter: 1%;
+// $columns: 12;
+// $size: 100%;
+// $grid-color: #cccccc;
+// $grid-color-rba:rgba(0,0,0,0.1);
+//
+// $col-color: #999999;
+// $col-color-rba: rgba(0,0,0,0.2);
+// $border-col: 1px solid rgba(0,0,0,0.1);
+
+//--------------- Image ---------------\\
+
+	//	$img-display: block;
+	//	$img-max-width: 100%;
+	//	$img-height: auto; 
+
+//--------------- Table ---------------\\
+
+	//----- table -----\\
+	// $table-margin: 10px;
+	// $table-width: 89%;
+
+	//----- th - td -----\\
+	// $table-td-border-color: #e5e5e5;
+	// $table-td-border-type: solid;
+	// $table-td-border-size: 2px;
+	// $table-td-padding: 12px;
+	// $table-th-border-color: #e5e5e5;
+	// $table-th-border-type: solid;
+	// $table-th-border-size: 2px;
+	// $table-th-text-align: center;
+	// $table-th-padding: 12px;
+	// $table-th-font-weight: bold;
+
+	//----- table and child color -----\\
+	// $table-n-child-bgcolor: RosyBrown;
+	// $table-bgcolor: Silver;
+
+	//----- table selected -----\\
+	// $table-selected-bgcolor: #555;
+	// $table-selected-color: white;
+
+	//----- table hover -----\\
+	// $table-td-hover-bgcolor: #C1C1C1;
+	// $table-td-hover-color: black;
+
+//--------------- Typo ---------------\\
+
+	//----- text -----\\
+	// $text-left-text-align: left;
+	// $text-right-text-align: right;
+	// $text-center-text-align: center;
+	// $text-justify-text-align: justify;
+	// $text-lowercase-text-transform: lowercase;
+	// $text-uppercase-text-transform: uppercase;
+	// $h-color: black;
+	// $h-ffamily: 'Open Sans', Verdana, sans-serif;
+	// $h1-fsize: 2em;
+	// $h2-fsize: 1.8em;
+	// $h3-fsize: 1.6em;
+	// $h4-fsize: 1.4em;
+	// $h5-fsize: 1.2em;
+	// $h6-fsize: 1em;
+	// $small-color: grey;
+	// $small-fsize: 0.8em;
+	// $p-line-height: inherit;
+
+	//----- typo -----\\
+	// $mark-bcg-colr: yellow;
+	// $mark-color: black;
+	// $del-text-decoration: line-through;
+	// $ins-text-decoration: underline;
+	// $ul-text-decoration: underline;
+	// $strong-fweight: bold;
+	// $em-fstyle: italic;
+	// $abbr-text-decoration: underline;
+	// $abbr-text-decoration-style: dotted;
+
+	//----- pre -----\\
+	// $pre-padding:  0.5em 10px;
+	// $pre-margin: 1.5em 10px;
+	// $pre-word-wrap: break-word;
+	// $pre-white-space: pre-wrap;
+
+	//----- code -----\\
+	// $code-bgcolor: #1B2426;
+	// $code-border: 1px solid #ccc;
+	// $code-color: white;
+	// $code-display: block;
+	// $code-padding: 0.5em 10px;
+	// $code-margin: 1.5em 10px;
+
+	//----- quote -----\\
+	// $blockquote-bgcolor: #f9f9f9;
+	// $blockquote-border: 1px solid #ccc;
+	// $blockquote-border-left: 10px solid #ccc;
+	// $blockquote-margin: 1.5em 10px;
+	// $blockquote-padding: 0.5em 10px;
+	// $blockquote-quotes: "\201C""\201D""\2018""\2019";
+	// $blockquote-fstyle: italic;
+	// $blockquote-b-color: #ccc;
+	// $blockquote-b-content: open-quote;
+	// $blockquote-b-fsize: 4em;
+	// $blockquote-b-line-height: 0.1em;
+	// $blockquote-b-margin-right: 0.25em;
+	// $blockquote-b-vertical-align: -0.4em;
+	// $blockquote-p-display: inline;
+
+	//----- kdb -----\\
+	// $kbd-bgcolor: #f4f7f8;
+	// $kbd-border-radius: 3px;
+	// $kbd-border: 1px solid #b4b4b4;
+	// $kbd-box-shadow:  0 1px 1px rgba(0,0,0,.2),0 2px 0 0 rgba(255,255,255,.7) inset;
+	// $kbd-display: inline-block;
+	// $kbd-ffamily: Consolas,"Liberation Mono",Courier,monospace;
+	// $kbd-fsize: .85em;
+	// $kbd-fweight : 600;
+	// $kbd-opacity: .8;
+	// $kbd-line-height: inherit;
+	// $kbd-padding: 2px 4px;
+	// $kbd-white-space: nowrap;

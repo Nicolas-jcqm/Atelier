@@ -25,9 +25,11 @@ final class HomeController
     public function dispatch(Request $request, Response $response, $args)
     {
         $this->logger->info("Home page action dispatched");
-		echo $_SESSION['creatorCo'];
+
+		    echo $_SESSION['creatorCo'];
         $name = Creator::find($_SESSION['creatorCo'])->name;
-        $this->view->render($response, 'hello.twig',["name"=>$name]);
+        $this->view->render($response, 'main.twig');
+
 		
         return $response;
     }
