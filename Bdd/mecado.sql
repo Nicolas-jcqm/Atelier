@@ -31,7 +31,7 @@ CREATE TABLE `booking` (
   `reserverName` varchar(50) NOT NULL,
   `message` varchar(200) NOT NULL,
   `idItem` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE `comment` (
   `senderName` varchar(50) NOT NULL,
   `content` varchar(200) NOT NULL,
   `idList` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE `creator` (
   `firstName` varchar(50) NOT NULL,
   `mail` varchar(60) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ CREATE TABLE `item` (
   `url` varchar(200) NOT NULL,
   `picture` varchar(50) NOT NULL,
   `idGroup` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,7 @@ CREATE TABLE `list` (
   `token` varchar(20) NOT NULL,
   `isRecipient` tinyint(1) NOT NULL,
   `idCreator` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `participant` (
   `name` varchar(50) NOT NULL,
   `amountGiven` float NOT NULL,
   `idPot` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `pot` (
   `amount` float NOT NULL,
   `currentSum` float NOT NULL,
   `idItem` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Index pour les tables exportées

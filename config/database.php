@@ -7,7 +7,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'boilerplate_slim',
+    'database'  => 'mecado',
     'username'  => 'root',
     'password'  => '',
     'charset'   => 'utf8',
