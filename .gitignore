@@ -5,3 +5,8 @@ db.ini
 /vendor
 composer.lock
 vendor
+
+storage/cache/
+storage/log/
+
+config/database.php
