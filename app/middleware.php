@@ -10,9 +10,10 @@ $app->add(function ($request, $response, $next) {
 
 $middleware_no_need_co = function ($request, $response, $next) {
     if(isset($_SESSION['creatorCo'])){
-        //redirect vers home co
-    }else
-    return $next($request, $response);
+        return $response->withRedirect($this->container->router->pathFor('signup'));
+    }else {
+        return $next($request, $response);
+    }
 
 };
 $middleware_need_co=function ($request, $response, $next) {

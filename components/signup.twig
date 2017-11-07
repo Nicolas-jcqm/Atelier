@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
 	<link rel="stylesheet" href="framework.css">
 </head>
 <body>
+
+
 
 <form action="{{ url_form }}" method="post">
 	<div>
@@ -27,7 +30,14 @@
 	<div>
 		<input type="submit" name="envoi" value="Envoyer">
 	</div>
+	{%  if erreurs|length > 0 %}
+	<div>
+		{% for error in erreurs %}
+		<p>{{ error }}</p>
+		{% endfor %}
+	</div>
 
+	{% endif %}
 </form>
 </body>
 </html>
