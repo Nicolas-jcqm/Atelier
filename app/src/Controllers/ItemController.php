@@ -17,21 +17,18 @@ final class ItemController
         $this->view = $view;
         $this->logger = $logger;
         $this->model = $user;
-    }
 
-    public function addItem($title, $desc, $price, $url , $picture){
-        $Item = new \app\Models\Item();
-        
-        $Item->title = $title;
-        $Item->description = $desc;
-        $Item->price = $price;
-        $Item->url = $url;
+    public function addItem(Request $request, Response $response, $args){
+        $Item->title = $request->POST["title"];
+        $Item->description = $request->POST["desc"];
+        $Item->price = $request->POST["price"];
+        $Item->url = $request->POST["url"];
         $Item->idGroup = null;
         
-        if (isset($_FILES['fileToUpload']) AND $_FILES['fileToUpload'] ['error'] == 0){
+        if (isset($_FILES['FTU']) AND $_FILES['FTU'] ['error'] == 0){
             $nomdate = date('o').'-'.date("m").'-'.date('d').'-'.date('H').'-'.date('i').'-'.date('s');
-            $ext = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-            move_uploaded_file($_FILES['fileToUpload'] ['tmp_name'], 'img/' .$nomdate.'.'.$ext);
+            $ext = pathinfo($_FILES["FTU"]["name"], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['FTU'] ['tmp_name'], 'img/' .$nomdate.'.'.$ext);
             $Item->picture; = $nomdate.'.'.$ext;
             
         }else{
@@ -39,6 +36,8 @@ final class ItemController
         }
         
         $Item->save();
+        
+        $this->view->render($response, 'list.twig');
         
     }
 }
