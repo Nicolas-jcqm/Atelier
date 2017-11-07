@@ -1,0 +1,165 @@
+@import "mixins/buttons";
+@import "variables";
+
+/* Color */
+$b-default: #b3b3b3 !default;
+$b-default-active: #8c8c8c !default;
+$b-color-default: white !default;
+$b-border-radius: 12px !default;
+
+$b-primary: #161616 !default;
+$b-primary-active:#337ab7 !default;
+
+$b-secondary: #3dd28d !default;
+$b-secondary-active: #0000b3 !default;
+
+$b-success: #416dea !default;
+$b-success-active: #3e8e3e !default;
+
+$b-info:    #F32C52 !default;
+$b-info-active:  #279bbe !default;
+
+$b-warning: #f0ad4e !default;
+$b-warning-active:  #d38312 !default;
+
+$b-danger:  #d9534f !default;
+$b-danger-active:  #a72925 !default;
+
+$b-link:  #9900ff !default;
+$b-link-active: #6b00b3 !default;
+
+$b-fanzy-font: Arial,sans-serif !default;
+$b-fanzy-backgrd-hover: linear-gradient( #777, #333) !default;
+$b-fanzy-bckgrd-active: linear-gradient( #555, #2C2C2C)!default;
+
+/* Font Size */
+$fz-default: 16px !default;
+$fz-small: 0.875rem !default;
+$fz-large: 1.25rem !default;
+
+/* Padding */
+$pdg-default: 10px 50px !default;
+
+$pdg-small-y:0.5rem !default;
+$pdg-small-x:0.25rem !default;
+$pdg-small:$pdg-small-x $pdg-small-y !default;
+
+$pdg-large-y: 1.5rem !default;
+$pdg-large-x: 0.75rem !default;
+$pdg-large: $pdg-large-x $pdg-large-y !default;
+
+/* Margin */
+$margin-left: 2% !default;
+$margin-right: 2% !default;
+
+/* Border radius */
+$border-radius-small: 0.2rem !default;
+$border-radius-large: 0.3rem !default;
+$border-radius-flat: 0px !default;
+
+/* line-height */
+$line-height-small: 0.1 !default;
+$line-height-large: 0,6 !default;
+
+/* button fancy */
+$backgroud-fancy: linear-gradient( #555, $b-default) !default;
+$text-shadow-fancy: 0px 1px 0px rgba( 255, 255, 255, 0.2) !default;
+$box-shadow-fancy: 0 0 5px rgba( 0, 0, 0, 0.5),
+          0 -1px 0 rgba( 255, 255, 255, 0.4) !default;
+$box-shadow-fancy-active:  1px 1px 10px black inset,
+            0 1px 0 rgba( 255, 255, 255, 0.4)!default;
+
+
+.btn{
+  @include button-btn($b-color-default, $b-default, $fz-default, $pdg-default, $margin-left, $margin-right, $b-border-radius,  $b-default-active);
+  &:hover {opacity:0.75;}
+}
+
+/* Différent boutons */
+.btn-primary {
+  @extend .btn;
+
+  @include button-color-active($b-primary, $b-primary-active);
+}
+
+.btn-secondary {
+  @extend .btn;
+
+  @include button-color-active($b-secondary, $b-secondary-active);
+}
+
+.btn-success{
+  @extend .btn;
+
+  @include button-color-active($b-success, $b-success-active);
+}
+
+.btn-info{
+  @extend .btn;
+
+  @include button-color-active($b-info, $b-info-active);
+}
+
+.btn-warning{
+  @extend .btn;
+
+  @include button-color-active-color($b-warning, $b-warning-active, $b-color-default);
+}
+
+.btn-danger{
+  @extend .btn;
+
+  @include button-color-active($b-danger, $b-danger-active);
+}
+
+.btn-link{
+  @extend .btn;
+
+  @include button-color-active($b-link, $b-link-active);
+}
+
+/* Taille des boutons */
+.btn-small{
+  @extend .btn;
+
+  @include button-size($pdg-small-x, $pdg-small-y, $fz-small, $border-radius-small, $line-height-small);
+}
+
+.btn-large{
+  @extend .btn;
+
+  @include button-size($pdg-large-x, $pdg-large-y, $fz-large, $border-radius-large, $line-height-large);
+}
+
+/* Apparence des boutons */
+
+.btn-flat{
+  @extend .btn;
+
+  @include button-flat(0, 0px, -5px);
+}
+
+.btn-lg{
+  @extend .btn;
+
+  @include button-lg(98%);
+}
+
+
+.btn-fancy{
+  @extend .btn;
+
+  @include button-fancy($b-fanzy-font, center, $backgroud-fancy, $text-shadow-fancy, $box-shadow-fancy, $b-fanzy-backgrd-hover, $b-fanzy-bckgrd-active, $box-shadow-fancy-active);
+}
+
+.btn-mixxin-variant{
+  @extend .btn;
+
+  @include button-variant ($b-color-default, $b-default, $b-default);
+}
+
+.bt-mixin-color {
+  @extend .btn;
+
+  @include button-color($b-color-default);
+}

@@ -1,0 +1,38 @@
+@import "mixins/alert";
+@import "variables";
+
+$v-alert-display: block !default;
+$v-alert-width: 100% !default;
+$v-alert-height: auto !default;
+$v-alert-font-weight: bold !default;
+$v-alert-padding: 1.5em !default;
+$v-alert-color: white !default;
+$v-alert-bg-secondcolor: #555 !default;
+                        
+.alert{
+  @include alert($v-alert-width, $v-alert-height, $v-alert-display, $v-alert-color, $v-alert-padding, $v-alert-font-weight);
+}
+.alert-default{
+  @extend .alert;
+  @include alert-bgcolor($b-default, $v-alert-bg-secondcolor);
+}
+.alert-primary{
+  @extend .alert;
+  @include alert-bgcolor($b-primary, $v-alert-bg-secondcolor);
+}
+.alert-success{
+  @extend .alert;
+  @include alert-bgcolor($b-success, $v-alert-bg-secondcolor);
+}
+.alert-info{
+  @extend .alert;
+  @include alert-bgcolor($b-info, $v-alert-bg-secondcolor);
+}
+.alert-warning{
+  @extend .alert;
+  @include alert-bgcolor($b-warning, $v-alert-bg-secondcolor);
+}
+.alert-danger{
+  @extend .alert;
+  @include alert-bgcolor($b-danger, $v-alert-bg-secondcolor);
+}
