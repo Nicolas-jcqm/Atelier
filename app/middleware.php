@@ -7,3 +7,14 @@ $app->add(function ($request, $response, $next) {
     $this->view->offsetSet('flash', $this->flash);
     return $next($request, $response);
 });
+
+$middleware_no_need_co = function ($request, $response, $next) {
+    if(isset($_SESSION['creatorCo'])){
+        //redirect vers home co
+    }else
+    return $next($request, $response);
+
+};
+$middleware_need_co=function ($request, $response, $next) {
+
+};
