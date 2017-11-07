@@ -1,0 +1,11 @@
+@import "variables";
+
+$img-display: block !default;
+$img-max-width: 100% !default;
+$img-height: auto !default;
+
+.img-responsive{
+	display: $img-display;
+	max-width: $img-max-width;
+	height: $img-height;
+}
