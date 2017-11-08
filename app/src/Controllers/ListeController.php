@@ -10,23 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 final class ListeController
 {
 
-    private $user;
-    private $listsArray;
-
-    public function __construct()
-    {
-        $this->user;
-        $this->listsArray = null;
-    }
-
-    public function displayLists(){
-        $this->user = 1;
-        // $this->>user = $_SESSION[''];
-        $this->listsArray = Lists::where('idCreator','=',$this->user)->get();
-        foreach ($this->listsArray as $l){
-            echo $l->title . '    ' . $l->description . '    '.'<br>';
-        }
-    }
 
     /*
      * Function qui genere un token, l'ajoute a la base et le renvoi

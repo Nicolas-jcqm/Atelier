@@ -2,3 +2,8 @@
     background-color: darkgray;
     height: 100px;
 }
+
+.textRight{
+    float:right;
+    margin-top : 50px;
+}

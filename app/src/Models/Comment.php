@@ -16,3 +16,4 @@ class Comment extends Model
     protected $primaryKey = 'id';
     public $timestamps = 'false';
 }
+

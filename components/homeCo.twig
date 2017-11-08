@@ -22,11 +22,27 @@
 <nav>
     <ul class="navbar bcg">
         <li><a href="#">Créer liste</a></li>
-        <li><a href="#">Visualiser liste</a></li>
         <li><a href="#">partager liste</a></li>
         <li><a href="#">AIDE</a></li>
     </ul>
 </nav>
+
+<h2>Voici toutes vos listes</h2>
+<div>
+    {%  if listsArray |length > 0 %}
+        <div>
+            {% for lists in listsArray %}
+                <div class="col col-span-12 bcg-col">
+                    <h1>Titre</h1> <p>{{ lists.title}} </p>
+                    <h2>Description</h2> <p>{{ lists.description }}</p>
+                    <button type="button" class="btn-link textRight">Afficher le contenu de la liste</button>
+                    <h3>Date de validité</h3> <p>{{ lists.validityDate }}</p>
+                    </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+</div>
 </body>
 
 </html>

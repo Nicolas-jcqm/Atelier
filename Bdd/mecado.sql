@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `mecado`
+-- Base de données Atelier :  `mecado`
 --
 
 -- --------------------------------------------------------
@@ -43,10 +43,10 @@ CREATE TABLE `activations` (
 --
 
 CREATE TABLE `booking` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `reserverName` varchar(50) NOT NULL,
   `message` varchar(200) NOT NULL,
-  `idItem` int(10) NOT NULL
+  `idItem` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -56,10 +56,10 @@ CREATE TABLE `booking` (
 --
 
 CREATE TABLE `comment` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `senderName` varchar(50) NOT NULL,
   `content` varchar(200) NOT NULL,
-  `idList` int(10) NOT NULL
+  `idList` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,14 +83,14 @@ CREATE TABLE `creator` (
 --
 
 CREATE TABLE `item` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
   `price` float NOT NULL,
   `url` varchar(200) NOT NULL,
   `picture` varchar(50) NOT NULL,
   `idGroup` int(10) NOT NULL,
-  `idList` int(10) NOT NULL
+  `idList` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,13 +100,15 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `list` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
   `validityDate` date NOT NULL,
   `token` varchar(50) NOT NULL,
   `isRecipient` tinyint(1) NOT NULL,
-  `idCreator` int(10) NOT NULL
+  `updated_at` date NOT NULL,
+  `created_at` date NOT NULL,
+  `idCreator` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,10 +118,10 @@ CREATE TABLE `list` (
 --
 
 CREATE TABLE `participant` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `amountGiven` float NOT NULL,
-  `idPot` int(10) NOT NULL,
+  `idPot` VARCHAR(100) NOT NULL,
   `messagePot` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -144,10 +146,10 @@ CREATE TABLE `persistences` (
 --
 
 CREATE TABLE `pot` (
-  `id` int(10) NOT NULL,
+  `id` VARCHAR(100) NOT NULL,
   `amount` float NOT NULL,
   `currentSum` float NOT NULL,
-  `idItem` int(10) NOT NULL
+  `idItem` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
