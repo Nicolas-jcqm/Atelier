@@ -7,3 +7,21 @@
     float:right;
     margin-top : 50px;
 }
+
+@media (max-width: 577px) {
+    .textRight{
+        margin-top:90px;
+    }
+}
+
+nav+h2{
+    margin: 15px 0;
+}
+
+.titleLists{
+    color : #9900ff;
+}
+
+.titleLists+hr{
+    margin-bottom: 25px;
+}
