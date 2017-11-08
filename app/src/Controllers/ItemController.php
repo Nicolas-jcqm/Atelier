@@ -19,10 +19,14 @@ final class ItemController
         $this->model = $user;
 
     public function addItem(Request $request, Response $response, $args){
-        $Item->title = $request->POST["title"];
-        $Item->description = $request->POST["desc"];
-        $Item->price = $request->POST["price"];
-        $Item->url = $request->POST["url"];
+        
+        $Item = new App/src/Model/Item();
+        
+        $Item->title = $request->getParsedBodyParam("title");
+        $Item->description = $request->getParsedBodyParam("desc");
+        $Item->price = $request->getParsedBodyParam("price");
+        $Item->url = $request->getParsedBodyParam("url");
+        $Item->idList = $request->getParsedBodyParam("idform")
         $Item->idGroup = null;
         
         if (isset($_FILES['FTU']) AND $_FILES['FTU'] ['error'] == 0){
@@ -37,7 +41,7 @@ final class ItemController
         
         $Item->save();
         
-        $this->view->render($response, 'list.twig');
+        $this->view->render($response, 'home.twig');
         
     }
 }
