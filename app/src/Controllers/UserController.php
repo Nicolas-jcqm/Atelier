@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Creator;
+use App\Models\Lists;
 
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -20,6 +21,7 @@ final class UserController
         $this->logger = $c->get('logger');
         $this->model = $c->get('App\Repositories\UserRepository');
         $this->router = $c->get('router');
+
     }
 
     public function signup(Request $request, Response $response, $args)
@@ -142,7 +144,8 @@ final class UserController
 
     public function homeCo(Request $request, Response $response, $args){
         $creator = Creator::find($_SESSION['creatorCo']);
-        return $this->view->render($response, 'homeCo.twig', ["creator"=>$creator]);
+        $listsArray = Lists::where('idCreator','=',$creator->id)->get();
+        return $this->view->render($response, 'homeCo.twig', ["creator"=>$creator,  "listsArray"=>$listsArray] );
     }
 
     public function disconnect(Request $request, Response $response, $args){
