@@ -84,6 +84,10 @@ $container['App\Controllers\UserController'] = function ($c) {
     return new App\Controllers\UserController($c);
 };
 
+$container['App\Controllers\ItemController'] = function ($c) {
+    return new App\Controllers\ItemController($c);
+};
+
 $container['App\Controllers\ListeController'] = function ($c) {
     return new App\Controllers\ListeController($c);
 };
