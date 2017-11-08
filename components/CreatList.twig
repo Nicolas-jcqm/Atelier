@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mecado</title>
+    <link href="style/Mecado.css" rel="stylesheet">
+    <link href="style/scss/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
+
+<body>
+<header>
+    <div class="header">
+        <h1>Mecado</h1>
+    </div>
+
+</header>
+<nav>
+    <ul class="navbar bcg">
+        <li><a href="/creatList">Créer liste</a></li>
+        <li><a href="#">Visualiser liste</a></li>
+        <li><a href="#">partager liste</a></li>
+        <li><a href="#">AIDE</a></li>
+    </ul>
+</nav>
+
+<form action="{{ url_form }}" method="post">
+    <div>
+        <label for="title">Votre Titre</label>
+        <input type="text" class="form-control" required name="title" id="title">
+    </div>
+    <div>
+        <label for="description">Votre description</label>
+        <textarea type="text" class="form-control" rows="5" required name="description" id="description"></textarea>
+    </div>
+    <div>
+        <label for="validityDate">Votre date de validité</label>
+        <input type="date" required name="validityDate" id="validityDate">
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" name="checkbox" value="offrir">Option 1</label>
+    </div>
+    <div>
+        <input type="submit" name="envoi" value="Envoyer">
+    </div>
+</form>
+
+</body>
+
+</html>

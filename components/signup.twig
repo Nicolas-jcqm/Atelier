@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Framework</title>
 	<link rel="stylesheet" href="framework.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 
@@ -13,19 +14,19 @@
 <form action="{{ url_form }}" method="post">
 	<div>
 		<label for="name">Votre nom</label>
-		<input type="text" required name="name" id="name">
+		<input class="form-control" type="text" required name="name" id="name">
 	</div>
 	<div>
 		<label for="firstName">Votre prénom</label>
-		<input type="text" required name="firstName" id="firstName">
+		<input class="form-control" type="text" required name="firstName" id="firstName">
 	</div>
 	<div>
 		<label for="mail">Votre email</label>
-		<input type="email" required name="mail" id="mail">
+		<input class="form-control" type="email" required name="mail" id="mail">
 	</div>
 	<div>
 		<label for="password">Votre mot de passe</label>
-		<input type="password" required name="password" id="password">
+		<input class="form-control" type="password" required name="password" id="password">
 	</div>
 	<div>
 		<input type="submit" name="envoi" value="Envoyer">
