@@ -2,14 +2,37 @@
 
 namespace App\Controllers;
 
+use App\Models\Lists;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Models\Lists;
 use Illuminate\Database\Eloquent\Model;
 
 final class ListeController
 {
 
+    private $user;
+    private $listsArray;
+
+    public function __construct($c)
+    {
+        $this->user;
+        $this->listsArray = null;
+
+        $this->view = $c->get('view');
+        $this->logger = $c->get('logger');
+        $this->model = $c->get('App\Repositories\UserRepository');
+        $this->router = $c->get('router');
+    }
+
+    public function displayLists(){
+        $this->user = 1;
+        // $this->>user = $_SESSION[''];
+        $this->listsArray = Lists::where('idCreator','=',$this->user)->get();
+        foreach ($this->listsArray as $l){
+            echo $l->title . '    ' . $l->description . '    '.'<br>';
+        }
+    }
 
     /*
      * Function qui genere un token, l'ajoute a la base et le renvoi
@@ -38,7 +61,45 @@ final class ListeController
             return false;
         }
     }
+    public function creatList(Request $request, Response $response, $args){
+        $url_form = $this->router->pathFor('creatList');
+        return $this->view->render($response, 'CreatList.twig', ["url_form"=>$url_form]);
+    }
 
+    public function validation_creatList(Request $request, Response $response, $args){
+        $parsedBody = $request;
+        var_dump('ok',$parsedBody->getParsedBodyParam('checkbox'));
+
+        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Envoyer" ){
+            $title=$parsedBody->getParsedBodyParam('title');
+            $description=$parsedBody->getParsedBodyParam('description');
+            $validityDate=$parsedBody->getParsedBodyParam('validityDate');
+            $checkbox=$parsedBody->getParsedBodyParam('checkbox');
+
+
+
+            if($checkbox === NULL){
+
+                $checkbox=4;
+
+            }else{
+                $checkbox=1;
+            }
+
+            $list = new Lists();
+            $list->id = uniqid();
+            $list->title=$title;
+            $list->description=$description;
+            $list->validityDate=$validityDate;
+            $list->token='hhhh';
+            $list->isRecipient=$checkbox;
+            $list->idCreator=$_SESSION['creatorCo'];
+            $list->save();
+            return $response->withRedirect($this->router->pathFor('homeCo'));
+
+        }
+
+    }
     /*
     * fonction qui genere le token de la liste validée,
     * destiné au bénéficiaire de la liste.
@@ -64,17 +125,7 @@ final class ListeController
      
     }
 
-    public function __get($attName) {
-        if(property_exists($this, $attName))
-            return $this->$attName;
-        else throw new \Exception("Erreur : attribut ".$attName." inexistant.", 1);
-    }
 
-    public function __set($attName, $value) {
-        if(property_exists($this, $attName))
-            $this->$attName = $value;
-        else throw new \Exception("Erreur : attribut ".$attName." inexistant.", 1);
-    }
 }
 
 
