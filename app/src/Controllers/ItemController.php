@@ -21,16 +21,17 @@ final class ItemController
         $this->router = $c->get('router');
     }
 
-    public function addItem(Request $request, Response $response, $args){
+   public function addItem(Request $request, Response $response, $args){
         
         $Item = new Item();
-        
+        $Item->id = uniqid();
         $Item->title = $request->getParsedBodyParam("title");
         $Item->description = $request->getParsedBodyParam("desc");
         $Item->price = $request->getParsedBodyParam("price");
         $Item->url = $request->getParsedBodyParam("url");
         $Item->idList = $request->getParsedBodyParam("idform");
-        $Item->idGroup = null;
+        $Item->idGroup = 0;
+        $Item->picture = 'default.jpg';
         
         if (isset($_FILES['FTU']) AND $_FILES['FTU'] ['error'] == 0){
             $nomdate = date('o').'-'.date("m").'-'.date('d').'-'.date('H').'-'.date('i').'-'.date('s');
@@ -44,31 +45,23 @@ final class ItemController
         
         $Item->save();
         
-        $this->viewItemNoRoute($request->getParsedBodyParam("idlist"));
+        $url = $this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]);
+        
+        $creator = Creator::find($_SESSION['creatorCo']);
+        $this->view->render($response, 'ItemConfirmer.twig', ["creator" =>$creator, "url" =>$url]);
         
         
     }
     
     public function viewItem(Request $request, Response $response, $args){
         
-        $item = Item::where("idList","=",$args['id']);
-        
-        var_dump($item);
-        
+        $item = Item::where("idList","=",$args['id'])->get();
+    
+        $url = $this->router->pathFor('itemadd');
+            
         $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id']]);
         
     }
     
-    
-    public function viewItemNoRoute($list){
-        
-        $item = Item::where("idList","=",$list);
-        
-        var_dump($item);
-        
-        $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item]);
-        
-    }
  }
