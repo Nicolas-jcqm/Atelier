@@ -40,7 +40,7 @@ final class ItemController
             $Item->picture = $nomdate.'.'.$ext;
             
         }else{
-            echo "Sorry, there was an error uploading your file.";
+            
         }
         
         $Item->save();
