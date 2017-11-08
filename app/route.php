@@ -30,5 +30,5 @@ $app->get('/liste/{id}/generateSharingToken','App\Controllers\ListeController:ge
 $app->get('/liste/{id}/generateSharingFinalToken','App\Controllers\ListeController:generateSharingFinalToken')->setName('tokenfinal');
 
 //creation d'une liste
-$app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList');
+$app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);
 $app->post('/creatList', 'App\Controllers\ListeController:validation_creatList');
