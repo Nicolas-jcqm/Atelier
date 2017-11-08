@@ -12,11 +12,12 @@ final class ItemController
     private $logger;
 	private $user;
 
-    public function __construct($view, LoggerInterface $logger, $user)
+     public function __construct($c)
     {
-        $this->view = $view;
-        $this->logger = $logger;
-        $this->model = $user;
+        $this->view = $c->get('view');
+        $this->logger = $c->get('logger');
+        $this->router = $c->get('router');
+    }
 
     public function addItem(Request $request, Response $response, $args){
         
@@ -42,6 +43,8 @@ final class ItemController
         $Item->save();
         
         $this->view->render($response, 'home.twig');
+        
+        
         
     }
 }
