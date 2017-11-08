@@ -12,11 +12,16 @@
 <body>
 <header>
     <div class="header">
-        <h1>Mecado</h1>
         <div>
-            <p>bonjour {{ creator.name }}</p>
+            <h1>Mecado</h1>
+            <h6>Bonjour, {{ creator.name }} {{ creator.firstName }} !</h6>
         </div>
-        <a href="/disconnect" class="btn btn-small">Se deconnecter</a>
+
+        <div  class="text-right btnLogNav ">
+
+            <a href="/disconnect" class="btn-link btn-flat">Se deconnecter</a>
+
+        </div>
     </div>
 
 </header>

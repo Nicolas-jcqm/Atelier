@@ -3,23 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Framework</title>
-    <link rel="stylesheet" href="framework.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="style/Mecado.css" rel="stylesheet">
+    <link href="style/scss/main.css" rel="stylesheet">
 </head>
 <body>
+<header>
+    <div class="header">
+        <div><h1>Mecado</h1></div>
+        <div  class="text-right btnLogNav">
+            <a href="/signup" class="btn-link btn-flat text-center">S'incrire</a>
+            <a href="/signin" class="btn-link btn-flat">Se connecter</a>
+        </div>
+    </div>
 
-<form action="{{ url_form }}" method="post">
-    <div>
-        <label for="mail">Votre email</label>
-        <input type="email" required name="mail" id="mail">
-    </div>
-    <div>
-        <label for="password">Votre mot de passe</label>
-        <input type="password" required name="password" id="password">
-    </div>
-    <div>
-        <input type="submit" name="envoi" value="Connexion">
-    </div>
+</header>
+<nav>
+    <ul class="navbar bcg">
+        <li><a href="/creatList">Créer liste</a></li>
+        <li><a href="#">Visualiser liste</a></li>
+        <li><a href="#">partager liste</a></li>
+        <li><a href="#">AIDE</a></li>
+    </ul>
+</nav>
+<div>
+    <h2 class="text-center" style="margin-top: 2%;">Connectez vous, ici.</h2>
+
+    <form action="{{ url_form }}" method="post">
+    <ul class="form-style-1">
+        <li>
+            <label for="mail">Votre email</label>
+            <input class="field-long" type="email" required name="mail" id="mail">
+        </li>
+        <li>
+            <label for="password">Votre mot de passe</label>
+            <input class="field-long" type="password" required name="password" id="password">
+        </li>
+        <li class=" text-center">
+            <input class="btn-link btn-flat" type="submit" name="envoi" value="Connexion">
+        </li>
+
+    </ul>
+
     {%  if erreurs|length > 0 %}
         <div>
             {% for error in erreurs %}
@@ -30,5 +54,6 @@
     {% endif %}
 
 </form>
+</div>
 </body>
 </html>

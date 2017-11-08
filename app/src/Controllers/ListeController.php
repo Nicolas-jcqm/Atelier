@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Lists;
+use App\Models\Creator;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -62,8 +63,9 @@ final class ListeController
         }
     }
     public function creatList(Request $request, Response $response, $args){
+        $creator = Creator::find($_SESSION['creatorCo']);
         $url_form = $this->router->pathFor('creatList');
-        return $this->view->render($response, 'CreatList.twig', ["url_form"=>$url_form]);
+        return $this->view->render($response, 'CreatList.twig', ["url_form"=>$url_form, "creator"=>$creator]);
     }
 
     public function validation_creatList(Request $request, Response $response, $args){
