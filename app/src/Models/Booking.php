@@ -14,5 +14,5 @@ class Booking extends Model
 {
     protected $table = "booking";
     protected $primaryKey = 'id';
-    public $timestamps = 'false';
+    public $timestamps = false;
 }
