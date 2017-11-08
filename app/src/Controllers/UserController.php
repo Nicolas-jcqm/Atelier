@@ -14,6 +14,7 @@ final class UserController
     private $view;
     private $logger;
     private $router;
+    
     public function __construct($c)
     {
         $this->view = $c->get('view');
