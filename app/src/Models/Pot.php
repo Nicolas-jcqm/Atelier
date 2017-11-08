@@ -14,5 +14,5 @@ class Pot extends Model
 {
     protected $table = "pot";
     protected $primaryKey = 'id';
-    public $timestamps = 'false';
+    public $timestamps = false;
 }

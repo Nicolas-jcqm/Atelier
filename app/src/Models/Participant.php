@@ -14,5 +14,5 @@ class Participant extends Model
 {
     protected $table = "participant";
     protected $primaryKey = 'id';
-    public $timestamps = 'false';
+    public $timestamps = false;
 }
