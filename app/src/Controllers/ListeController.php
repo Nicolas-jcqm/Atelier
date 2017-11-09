@@ -143,18 +143,6 @@ final class ListeController
     }
 
     /*
-	   * permet de renvoyer la liste des commentaires d'une liste de cadeau
-     */
-    public function commentList(Request $request, Response $response, $args){
-        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
-        foreach ($comment as $key => $value) {
-            echo 'Nom: '.$value->senderName.'<br>Message; '.$value->content.'<br> Posté le '.$value->created_at->format('d/m/Y').' à '.$value->created_at->modify('+1 hour')->format('H:i:s').' (UTC +1)<br><br>';
-        }
-        $url_form = $this->router->pathFor('comment',["id"=>$args['id']]);
-        return $this->view->render($response, 'comment.twig', ["url_form"=>$url_form,'erreurs'=>$erreur=[]]);
-    }
-
-    /*
     * Permet d'ajouter des commentaire globaux a une liste
     */
     public function addCommentList(Request $request, Response $response, $args){
@@ -164,7 +152,7 @@ final class ListeController
         $comment->content=$request->getParsedBodyParam('content');
         $comment->idlist=$args['id'];
         $comment->save();
-        return $response->withRedirect($this->router->pathFor('comment',["id"=>$args['id']]));
+        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id']]));
     }
 
     /* fontion qui permet d'effectuer une vérification sur la date de validite d'une liste

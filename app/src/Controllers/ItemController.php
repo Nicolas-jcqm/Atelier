@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\Item;
 use App\Models\Creator;
+use App\Models\Comment;
 
 final class ItemController
 {
@@ -58,9 +59,10 @@ final class ItemController
         $item = Item::where("idList","=",$args['id'])->get();
     
         $url = $this->router->pathFor('itemadd');
-            
+        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
+
         $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id']]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment, "url" =>$url, "idlist" =>$args['id']]);
         
     }
     

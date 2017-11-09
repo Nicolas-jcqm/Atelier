@@ -38,7 +38,7 @@ $app->get('/liste/{id}/generateSharingFinalToken','App\Controllers\ListeControll
 
 $app->get('/liste/{id}/commentList','App\Controllers\ListeController:commentList')->setName('comment');
 
-$app->post('/liste/{id}/commentList','App\Controllers\ListeController:addCommentList');
+$app->post('/homeCo/{id}/addComment','App\Controllers\ListeController:addCommentList');
 
 $app->get('/liste/{id}/checkAndUpValidityDate','App\Controllers\ListeController:checkAndUpValidityDate')->setName('checklistdate');
 
