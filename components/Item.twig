@@ -26,6 +26,35 @@
             <li><a href="#">Partager liste</a></li>
         </ul>
     </nav>
+
+    <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
+    <br>
+    {% if liste.isValidate %}
+        {% if liste.token is null %}
+            <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
+            Générez le token cadeau :
+        {% else %}
+            <a><button class='btn-secondary btn-flat'>
+            Donnez ce lien au bénéficiaire de la liste :
+        {% endif %}
+    {% else %}
+        {% if liste.token is null %}
+            <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
+            Générez votre token de partage :
+        {% else %}
+            <a><button class='btn-secondary btn-flat'>
+            Partagez ce lien à vos amis :
+        {% endif %}
+    {% endif %}
+    </button></a>
+    <input type="text" value='{{liste.token}}' readonly>
+    {% if liste.isValidate==false %}
+        <br><br>
+        <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a>
+    {% endif%}
+    <br><br>
+
+
     <div class="formulaire-item">
         <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
