@@ -167,7 +167,7 @@ final class ListeController
         return $response->withRedirect($this->router->pathFor('comment',["id"=>$args['id']]));
     }
 
-    * fontion qui permet d'effectuer une vérification sur la date de validite d'une liste
+    /* fontion qui permet d'effectuer une vérification sur la date de validite d'une liste
     * si la date est passee, efface le token correspondant a la liste
     * renvoi true si la liste est validée
     * renvoi false si la liste n'est pas encore validée
