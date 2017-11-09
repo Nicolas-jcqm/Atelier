@@ -63,7 +63,6 @@ final class ItemController
         $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
 
         $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment, "url" =>$url, "idlist" =>$args['id']]);
         
         $formcrea = "aucun";
         
@@ -79,7 +78,7 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
 
