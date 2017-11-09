@@ -30,7 +30,8 @@ $app->get('/homeCo/{id}/item', 'App\Controllers\ItemController:viewItem')->setNa
 $app->post('/homeCo/itemadd', 'App\Controllers\ItemController:addItem')->setName('itemadd')->add($middleware_need_co);
 
 $app->get('/viewGuest/{token}', 'App\Controllers\GuestsListController:displayListGuest')->setName('viewGuest');
-
+//reserver token
+$app->post('/viewGuest/{token}','App\Controllers\GuestsListController:bookItem');
 
 
 //ajouter middleware pour verifier si l'utilisateur qui clique est le createur de la liste//soit rajouter la verification dans la function
