@@ -107,7 +107,7 @@ CREATE TABLE `list` (
   `token` varchar(50),
   `isRecipient` tinyint(1) NOT NULL,
   `idCreator` VARCHAR(100) NOT NULL,
-  `isValidate` tinyint(1) NOT NULL
+  `isValidate` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
