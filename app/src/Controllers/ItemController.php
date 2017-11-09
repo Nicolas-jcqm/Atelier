@@ -9,6 +9,8 @@ use App\Models\Item;
 use App\Models\Booking;
 use App\Models\Lists;
 use App\Models\Creator;
+use App\Models\Comment;
+use App\Models\Lists;
 
 final class ItemController
 {
@@ -57,11 +59,29 @@ final class ItemController
     
     public function viewItem(Request $request, Response $response, $args){
         
+        $creator = Creator::find($_SESSION['creatorCo']);
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
-            
+        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
+
         $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id']]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment, "url" =>$url, "idlist" =>$args['id']]);
+        
+        $formcrea = "aucun";
+        
+        /*
+        if(isset($_SESSION['creatorCo'])){
+            $CreaRequest = Lists::where("id", "=", $args['id'])->get(['idCreator']);
+            if ($CreaRequest == $_SESSION['creatorCo']) {
+                $formcrea = "ok";
+            }
+        }
+        var_dump($_SESSION['creatorCo']);
+        var_dump($CreaRequest);
+        var_dump($formcrea);
+        */
+        
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
 
