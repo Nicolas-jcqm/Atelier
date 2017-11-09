@@ -47,8 +47,6 @@ $app->get('/liste/{id}/checkAndUpValidityDate','App\Controllers\ListeController:
 
 $app->get('/liste/{id}/ValidateList','App\Controllers\ListeController:ValidateList')->setName('ValidateList');
 
-//Reservation
-$app->post('liste/{id}/book', 'App\Controllers\ItemController:bookItem');
 
 //creation d'une liste
 $app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);

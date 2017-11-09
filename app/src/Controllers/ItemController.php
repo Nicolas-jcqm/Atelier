@@ -6,6 +6,8 @@ use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\Item;
+use App\Models\Booking;
+use App\Models\Lists;
 use App\Models\Creator;
 
 final class ItemController
@@ -63,9 +65,7 @@ final class ItemController
         
     }
 
-    /* Reservation d'un item*/
-    public function bookItem(Request $request, Response $response, $args){
 
-    }
+
     
  }
