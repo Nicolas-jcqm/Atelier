@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Lists;
 use App\Models\Creator;
-use App\Models\Comment;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -128,23 +127,7 @@ final class ListeController
      
     }
 
-    public function commentList(Request $request, Response $response, $args){
-        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
-        foreach ($comment as $key => $value) {
-            echo 'Nom: '.$value->senderName.'<br>Message; '.$value->content.'<br> Posté le '.$value->created_at->format('d/m/Y').' à '.$value->created_at->modify('+1 hour')->format('H:i:s').' (UTC +1)<br><br>';
-        }
-        $url_form = $this->router->pathFor('comment',["id"=>$args['id']]);
-        return $this->view->render($response, 'comment.twig', ["url_form"=>$url_form,'erreurs'=>$erreur=[]]);
-    }
 
-    public function addCommentList(Request $request, Response $response, $args){
-        $comment= new Comment();
-        $comment->senderName=$request->getParsedBodyParam('senderName');
-        $comment->content=$request->getParsedBodyParam('content');
-        $comment->idlist=$args['id'];
-        $comment->save();
-        return $response->withRedirect($this->router->pathFor('comment',["id"=>$args['id']]));
-    }
 }
 
 

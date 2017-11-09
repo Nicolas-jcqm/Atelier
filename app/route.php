@@ -31,6 +31,10 @@ $app->get('/liste/{id}/generateSharingToken','App\Controllers\ListeController:ge
 //ajouter middleware pour verifier si l'utilisateur qui clique est le createur de la liste//soit rajouter la verification dans la function
 $app->get('/liste/{id}/generateSharingFinalToken','App\Controllers\ListeController:generateSharingFinalToken')->setName('tokenfinal');
 
+$app->get('/liste/{id}/commentList','App\Controllers\ListeController:commentList')->setName('comment');
+
+$app->post('/liste/{id}/commentList','App\Controllers\ListeController:addCommentList');
+
 //creation d'une liste
 $app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);
 $app->post('/creatList', 'App\Controllers\ListeController:validation_creatList');
