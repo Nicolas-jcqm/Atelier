@@ -8,6 +8,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Item;
+use App\Models\Lists;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -29,7 +31,9 @@ class GuestsListController
     }
 
     public function displayListGuest(Request $request, Response $response, $args){
-        $url_form = $this->router->pathFor('viewGuest',["token"=>args['token']]);
-        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],args]);
+        $url_form = $this->router->pathFor('viewGuest',["token"=>$args['token']]);
+        $listItemGuestsId = Lists::select('id')->where('token','=',$args['token'])->first();
+        $listItem = Item::where('idList','=',$listItemGuestsId->id)->get();
+        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],$args,"item"=>$listItem]);
     }
 }
