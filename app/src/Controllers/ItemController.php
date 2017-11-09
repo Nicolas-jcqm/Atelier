@@ -77,6 +77,23 @@ final class ItemController
         $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
+    
+    public function groupItem(Request $request, Response $response, $args){
+       
+        var_dump($request->getParsedBodyParam("check"));
+        
+        $check = $request->getParsedBodyParam("check");
+        $idgroupGenerate = uniqid();
+        $size = count($check);
+        
+
+        for($i=0; $i < $size ; $i++){
+            Item::where('id', '=', $check[$i])->update(['idGroup' => $idgroupGenerate]);
+        }
+        
+        return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idlist")]));
+    }
+
 
     /* Reservation d'un item*/
     public function bookItem(Request $request, Response $response, $args){

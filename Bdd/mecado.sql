@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  127.0.0.1
--- Généré le :  Mar 07 Novembre 2017 à 23:51
--- Version du serveur :  5.7.14
--- Version de PHP :  7.0.10
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  jeu. 09 nov. 2017 à 15:57
+-- Version du serveur :  5.7.19
+-- Version de PHP :  5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données Atelier :  `mecado`
+-- Base de données :  `mecado`
 --
 
 -- --------------------------------------------------------
@@ -26,12 +28,15 @@ SET time_zone = "+00:00";
 -- Structure de la table `activations`
 --
 
-CREATE TABLE `activations` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `activations`;
+CREATE TABLE IF NOT EXISTS `activations` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `completed` tinyint(4) NOT NULL DEFAULT '0',
-  `completed_at` timestamp NULL DEFAULT NULL
+  `completed_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `activations_user_id_unique` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -40,11 +45,14 @@ CREATE TABLE `activations` (
 -- Structure de la table `booking`
 --
 
-CREATE TABLE `booking` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `booking`;
+CREATE TABLE IF NOT EXISTS `booking` (
+  `id` varchar(100) NOT NULL,
   `reserverName` varchar(50) NOT NULL,
   `message` varchar(200) NOT NULL,
-  `idItem` VARCHAR(100) NOT NULL
+  `idItem` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_booking_idItem` (`idItem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,13 +61,16 @@ CREATE TABLE `booking` (
 -- Structure de la table `comment`
 --
 
-CREATE TABLE `comment` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` varchar(100) NOT NULL,
   `senderName` varchar(50) NOT NULL,
   `content` varchar(200) NOT NULL,
-  `idList` VARCHAR(100) NOT NULL,
-  `updated_at` DATE NOT NULL,
-  `created_at` DATE NOT NULL
+  `idList` varchar(100) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_comment_idlist` (`idList`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,12 +79,14 @@ CREATE TABLE `comment` (
 -- Structure de la table `creator`
 --
 
-CREATE TABLE `creator` (
+DROP TABLE IF EXISTS `creator`;
+CREATE TABLE IF NOT EXISTS `creator` (
   `id` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `mail` varchar(60) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -82,15 +95,18 @@ CREATE TABLE `creator` (
 -- Structure de la table `item`
 --
 
-CREATE TABLE `item` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE IF NOT EXISTS `item` (
+  `id` varchar(100) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
   `price` float NOT NULL,
   `url` varchar(200) NOT NULL,
   `picture` varchar(50) NOT NULL,
-  `idGroup` int(10) NOT NULL,
-  `idList` VARCHAR(100) NOT NULL
+  `idGroup` varchar(100) NOT NULL,
+  `idList` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_item_idList` (`idList`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -99,15 +115,18 @@ CREATE TABLE `item` (
 -- Structure de la table `list`
 --
 
-CREATE TABLE `list` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `list`;
+CREATE TABLE IF NOT EXISTS `list` (
+  `id` varchar(100) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
   `validityDate` date NOT NULL,
-  `token` varchar(50),
+  `token` varchar(50) DEFAULT NULL,
   `isRecipient` tinyint(1) NOT NULL,
-  `idCreator` VARCHAR(100) NOT NULL,
-  `isValidate` tinyint(1) DEFAULT NULL
+  `idCreator` varchar(100) NOT NULL,
+  `isValidate` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_list_idcreator` (`idCreator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,12 +135,15 @@ CREATE TABLE `list` (
 -- Structure de la table `participant`
 --
 
-CREATE TABLE `participant` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `participant`;
+CREATE TABLE IF NOT EXISTS `participant` (
+  `id` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `amountGiven` float NOT NULL,
-  `idPot` VARCHAR(100) NOT NULL,
-  `messagePot` varchar(200) NOT NULL
+  `idPot` varchar(100) NOT NULL,
+  `messagePot` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_participant_idPot` (`idPot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -130,12 +152,15 @@ CREATE TABLE `participant` (
 -- Structure de la table `persistences`
 --
 
-CREATE TABLE `persistences` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `persistences`;
+CREATE TABLE IF NOT EXISTS `persistences` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `persistences_code_unique` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -144,11 +169,14 @@ CREATE TABLE `persistences` (
 -- Structure de la table `pot`
 --
 
-CREATE TABLE `pot` (
-  `id` VARCHAR(100) NOT NULL,
+DROP TABLE IF EXISTS `pot`;
+CREATE TABLE IF NOT EXISTS `pot` (
+  `id` varchar(100) NOT NULL,
   `amount` float NOT NULL,
   `currentSum` float NOT NULL,
-  `idItem` VARCHAR(100) NOT NULL
+  `idItem` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_pot_idItem` (`idItem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -157,14 +185,16 @@ CREATE TABLE `pot` (
 -- Structure de la table `reminders`
 --
 
-CREATE TABLE `reminders` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `reminders`;
+CREATE TABLE IF NOT EXISTS `reminders` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `completed` tinyint(4) NOT NULL DEFAULT '0',
   `completed_at` timestamp NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -173,13 +203,16 @@ CREATE TABLE `reminders` (
 -- Structure de la table `roles`
 --
 
-CREATE TABLE `roles` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `permissions` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_slug_unique` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -188,11 +221,13 @@ CREATE TABLE `roles` (
 -- Structure de la table `role_users`
 --
 
-CREATE TABLE `role_users` (
+DROP TABLE IF EXISTS `role_users`;
+CREATE TABLE IF NOT EXISTS `role_users` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -201,138 +236,20 @@ CREATE TABLE `role_users` (
 -- Structure de la table `throttle`
 --
 
-CREATE TABLE `throttle` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `throttle`;
+CREATE TABLE IF NOT EXISTS `throttle` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `throttle_user_id_unique` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Index pour les tables exportées
---
-
---
--- Index pour la table `activations`
---
-ALTER TABLE `activations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `activations_user_id_unique` (`user_id`);
-
---
--- Index pour la table `booking`
---
-ALTER TABLE `booking`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_booking_idItem` (`idItem`);
-
---
--- Index pour la table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_comment_idlist` (`idList`);
-
---
--- Index pour la table `creator`
---
-ALTER TABLE `creator`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `item`
---
-ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_item_idList` (`idList`);
-
---
--- Index pour la table `list`
---
-ALTER TABLE `list`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_list_idcreator` (`idCreator`);
-
---
--- Index pour la table `participant`
---
-ALTER TABLE `participant`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_participant_idPot` (`idPot`);
-
---
--- Index pour la table `persistences`
---
-ALTER TABLE `persistences`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `persistences_code_unique` (`code`);
-
---
--- Index pour la table `pot`
---
-ALTER TABLE `pot`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_pot_idItem` (`idItem`);
-
---
--- Index pour la table `reminders`
---
-ALTER TABLE `reminders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `roles_slug_unique` (`slug`);
-
---
--- Index pour la table `role_users`
---
-ALTER TABLE `role_users`
-  ADD PRIMARY KEY (`user_id`,`role_id`);
-
---
--- Index pour la table `throttle`
---
-ALTER TABLE `throttle`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `throttle_user_id_unique` (`user_id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `activations`
---
-ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `persistences`
---
-ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `reminders`
---
-ALTER TABLE `reminders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `throttle`
---
-ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- Contraintes pour les tables exportées
+-- Contraintes pour les tables déchargées
 --
 
 --
@@ -340,6 +257,7 @@ ALTER TABLE `throttle`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `fk_item_idList` FOREIGN KEY (`idList`) REFERENCES `list` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
