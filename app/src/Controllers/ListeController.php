@@ -26,7 +26,7 @@ final class ListeController
         $this->model = $c->get('App\Repositories\UserRepository');
         $this->router = $c->get('router');
     }
-    
+
     /*
      * Function qui genere un token, l'ajoute a la base et le renvoi
      * destiné au créateur, qui pourra le partager
