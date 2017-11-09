@@ -10,7 +10,6 @@ use App\Models\Booking;
 use App\Models\Lists;
 use App\Models\Creator;
 use App\Models\Comment;
-use App\Models\Lists;
 
 final class ItemController
 {
@@ -63,7 +62,7 @@ final class ItemController
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
         $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
-
+        $liste = Lists::where("id","=", $args["id"])->first();
         $creator = Creator::find($_SESSION['creatorCo']);
         
         $formcrea = "aucun";
@@ -80,7 +79,7 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
 

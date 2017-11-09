@@ -38,26 +38,27 @@ final class ListeController
         if(isset($liste)){
             if(!$liste->isValidate){
                 if($liste->token!=null){
-                    return $liste->token;
+                    return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id'],"token"=>$liste->token]));
                 }
                 else{
                     $token=bin2hex(random_bytes(16));
                     $liste->token=$token;
                     if($liste->save()){
-                        return $token;
+                        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id'],"token"=>$token]));
                     }
                     else{
-                        return "Problème d'insertion dans la base de donnée";
+                        echo "Problème d'insertion dans la base de donnée";
                     }
                 }
             }
             else{
-                return "Le créateur de la liste l'a déjà validée ou la date limite est passée";    
+                echo "Le créateur de la liste l'a déjà validée ou la date limite est passée";    
             }
         }
         else{
-            return "Liste inéxistante dans la base de donnée";
+            echo "Liste inéxistante dans la base de donnée";
         }
+        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id']]));
     }
     public function creatList(Request $request, Response $response, $args){
         $creator = Creator::find($_SESSION['creatorCo']);
@@ -116,20 +117,20 @@ final class ListeController
                     $token=bin2hex(random_bytes(16));
                     $liste->token=$token;
                     $liste->save();
-                    return $token;
+                    return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id'],"token"=>$token]));
                 }
                 else{
                     if(!$liste->isValidate)
                         return "Liste non validée";
                     if($liste->token!=null)
-                        return $liste->token;
+                        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id'],"token"=>$liste->token]));
                 }
             }
             else{
                 return "Liste non validée";
             }
         }
-        return false;
+        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id']]));
      
     }
 
@@ -179,7 +180,7 @@ final class ListeController
             $liste->validityDate=date('Y-m-d H:i:s');
             $liste->token=null;
             if($liste->save())
-                return true;
+                return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id']]));
             else
                 return false;
         }
