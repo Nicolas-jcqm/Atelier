@@ -128,6 +128,9 @@ final class ListeController
      
     }
 
+    /*
+	* permet de renvoyer la liste des commentaires d'une liste de cadeau
+    */
     public function commentList(Request $request, Response $response, $args){
         $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
         foreach ($comment as $key => $value) {
@@ -137,8 +140,12 @@ final class ListeController
         return $this->view->render($response, 'comment.twig', ["url_form"=>$url_form,'erreurs'=>$erreur=[]]);
     }
 
+    /*
+    * Permet d'ajouter des commentaire globaux a une liste
+    */
     public function addCommentList(Request $request, Response $response, $args){
         $comment= new Comment();
+        $comment->id=uniqid();
         $comment->senderName=$request->getParsedBodyParam('senderName');
         $comment->content=$request->getParsedBodyParam('content');
         $comment->idlist=$args['id'];
