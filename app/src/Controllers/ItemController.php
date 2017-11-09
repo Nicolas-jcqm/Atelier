@@ -62,5 +62,10 @@ final class ItemController
         $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id']]);
         
     }
+
+    /* Reservation d'un item*/
+    public function bookItem(Request $request, Response $response, $args){
+
+    }
     
  }

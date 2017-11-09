@@ -47,6 +47,7 @@
 
     <h2 class="text-center">Voici vos items</h2>
     <div class="container-item">
+
         {% for ipo in item %}
         <div class="item">
             <div class="info-item">
@@ -62,6 +63,7 @@
                 <img class="image-item" src="/img/{{ipo.picture}}">
             </div>
         </div>
+            
         {% endfor %}
     </div>
 </body>
