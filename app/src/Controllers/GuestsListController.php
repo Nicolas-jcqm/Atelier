@@ -38,28 +38,29 @@ class GuestsListController
         $listItemGuestsId = Lists::select('id')->where('token','=',$args['token'])->first();
         $listItem = Item::where('idList','=',$listItemGuestsId->id)->get();
 
+
         $idBook= Booking::select('idItem')->get();
-echo ' liste item'.$listItem;
-        echo '<br>';
 
-        foreach ($idBook as $key=>$val){
-            echo 'val'.$val;
-            echo '<br>';
+        $exist=true;
+        foreach ($listItem as $key=>$val2){
+            foreach ($idBook as $key=>$val){
 
-            foreach ($listItem as $key=>$val2){
-                echo 'vale2'.$val2->id;
-                echo '<br>';
-                echo 'new';
-                echo '<br>';
 
-                if($val2->id != $val->idItem ){
+                if( $val->idItem === $val2->id ){
+                   $exist=false;
+                    break;
 
-                    array_push($listItemNoBook,$val2);
+
                 }
             }
+            if($exist){
+                array_push($listItemNoBook,$val2);
+            }
+            $exist=true;
 
         }
-        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],$args,"item"=>$listItem]);
+        var_dump($listItemNoBook);
+        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],$args,"item"=>$listItemNoBook]);
 
     }
     public function bookItem(Request $request, Response $response, $args){
@@ -95,8 +96,8 @@ echo ' liste item'.$listItem;
                 $book->id = uniqid();
                 $book->reserverName =$reserverName;
                 $book->message=$message;
+$book->idItem=$parsedBody->getParsedBodyParam('idItem');
                 var_dump( 'item', $idItem);
-                $book->idItem=1;
                 $book->save();
 
                 $this->displayListGuest($request,  $response, $args);
