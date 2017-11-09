@@ -11,5 +11,4 @@ class Item extends Model
   protected $primaryKey = 'id';
   public $timestamps = false;
     public $incrementing = false;
-
 }
