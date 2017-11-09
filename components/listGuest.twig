@@ -23,9 +23,6 @@
 </header>
 <nav>
     <ul class="navbar bcg">
-        <li><a href="/creatList">Créer liste</a></li>
-        <li><a href="#">Visualiser liste</a></li>
-        <li><a href="#">partager liste</a></li>
         <li><a href="#">AIDE</a></li>
     </ul>
 </nav>
@@ -50,6 +47,26 @@
             </div>
         </div>
 
+        <div>
+            <form action="{{ url_form }}" method="post">
+                <ul class="form-style-1">
+                    <li>
+                        <label for="reserverName">Votre Nom</label>
+                        <input class="field-long" type="text" required name="reserverName" id="reserverName">
+                    </li>
+                    <li>
+                        <label for="message">Votre message</label>
+                        <input style="height: 100px;" class="field-long" type="text" required name="message" id="message">
+                    </li>
+                    <li class=" text-center">
+                        <input class="btn-link btn-flat" type="submit" name="envoi" value="Reserver cette item">
+                    </li>
+                    <li class=" text-center">
+                        <input class="btn-link btn-flat" type="hidden" name="idItem" id="idItem" value="{{ ipo.id }}">
+                    </li>
+                </ul>
+            </form>
+        </div>
     {% endfor %}
 </div>
 
