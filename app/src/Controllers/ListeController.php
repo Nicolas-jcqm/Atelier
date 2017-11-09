@@ -93,7 +93,7 @@ final class ListeController
             $list->title=$title;
             $list->description=$description;
             $list->validityDate=$validityDate;
-            $list->token='hhhh';
+            $list->token=null;
             $list->isRecipient=$checkbox;
             $list->idCreator=$_SESSION['creatorCo'];
             $list->save();
