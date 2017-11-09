@@ -40,7 +40,7 @@ final class UserController
         //Les données de mon body soit le $_POST ici
         $parsedBody = $request;
         $erreurArray=array();
-        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Envoyer" ){
+        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "S'incrire" ){
             $name=$parsedBody->getParsedBodyParam('name');
             $firstName=$parsedBody->getParsedBodyParam('firstName');
             $email=$parsedBody->getParsedBodyParam('mail');

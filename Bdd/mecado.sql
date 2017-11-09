@@ -57,7 +57,9 @@ CREATE TABLE `comment` (
   `id` VARCHAR(100) NOT NULL,
   `senderName` varchar(50) NOT NULL,
   `content` varchar(200) NOT NULL,
-  `idList` VARCHAR(100) NOT NULL
+  `idList` VARCHAR(100) NOT NULL,
+  `updated_at` DATE NOT NULL,
+  `created_at` DATE NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -102,11 +104,10 @@ CREATE TABLE `list` (
   `title` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
   `validityDate` date NOT NULL,
-  `token` varchar(50) NOT NULL,
+  `token` varchar(50),
   `isRecipient` tinyint(1) NOT NULL,
-  `updated_at` date NOT NULL,
-  `created_at` date NOT NULL,
-  `idCreator` VARCHAR(100) NOT NULL
+  `idCreator` VARCHAR(100) NOT NULL,
+  `isValidate` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

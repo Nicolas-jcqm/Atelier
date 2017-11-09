@@ -45,22 +45,27 @@ final class ListeController
     public function generateSharingToken(Request $request, Response $response, $args){
         $liste=Lists::where("id","=",$args['id'])->first();
         if(isset($liste)){
-            if($liste->token!=null){
-                return $liste->token;
-            }
-            else{
-                $token=bin2hex(random_bytes(16));
-                $liste->token=$token;
-                if($liste->save()){
-                    return $token;
+            if(!$liste->isValidate){
+                if($liste->token!=null){
+                    return $liste->token;
                 }
                 else{
-                    return false;
+                    $token=bin2hex(random_bytes(16));
+                    $liste->token=$token;
+                    if($liste->save()){
+                        return $token;
+                    }
+                    else{
+                        return "Problème d'insertion dans la base de donnée";
+                    }
                 }
+            }
+            else{
+                return "Le créateur de la liste l'a déjà validée ou la date limite est passée";    
             }
         }
         else{
-            return false;
+            return "Liste inéxistante dans la base de donnée";
         }
     }
     public function creatList(Request $request, Response $response, $args){
@@ -94,7 +99,7 @@ final class ListeController
             $list->title=$title;
             $list->description=$description;
             $list->validityDate=$validityDate;
-            $list->token='hhhh';
+            $list->token=null;
             $list->isRecipient=$checkbox;
             $list->idCreator=$_SESSION['creatorCo'];
             $list->save();
@@ -113,15 +118,24 @@ final class ListeController
         $liste=Lists::where("id","=",$args['id'])->first();
         if(isset($liste)){
 
-            //si date actuelle est > a date de l'event 
-            //alors remplace le token de partage et genere le tokenfinal
-            if(strtotime(date("d-m-Y"))>strtotime($liste->validityDate)){
-                if($liste->token==null){
+            //si date actuelle est >= a date de l'event
+            //alors genere le tokenfinal a la place du premier token effacé au préablable
+            if(strtotime(date("d-m-Y"))>=strtotime($liste->validityDate)){
+                if($liste->token==null&&$liste->isValidate){
                     $token=bin2hex(random_bytes(16));
                     $liste->token=$token;
                     $liste->save();
                     return $token;
                 }
+                else{
+                    if(!$liste->isValidate)
+                        return "Liste non validée";
+                    if($liste->token!=null)
+                        return $liste->token;
+                }
+            }
+            else{
+                return "Liste non validée";
             }
         }
         return false;
@@ -129,8 +143,8 @@ final class ListeController
     }
 
     /*
-	* permet de renvoyer la liste des commentaires d'une liste de cadeau
-    */
+	   * permet de renvoyer la liste des commentaires d'une liste de cadeau
+     */
     public function commentList(Request $request, Response $response, $args){
         $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
         foreach ($comment as $key => $value) {
@@ -152,6 +166,48 @@ final class ListeController
         $comment->save();
         return $response->withRedirect($this->router->pathFor('comment',["id"=>$args['id']]));
     }
+
+    * fontion qui permet d'effectuer une vérification sur la date de validite d'une liste
+    * si la date est passee, efface le token correspondant a la liste
+    * renvoi true si la liste est validée
+    * renvoi false si la liste n'est pas encore validée
+    */
+    public function checkAndUpValidityDate(Request $request, Response $response, $args){
+        $liste=Lists::where("id","=",$args['id'])->first();
+        if(isset($liste)){
+            if(strtotime(date("d-m-Y"))>=strtotime($liste->validityDate)){
+                if(!$liste->isValidate){
+                    $liste->isValidate=true;
+                    $liste->token=null;
+                    $liste->save();
+                }
+                return true;
+            }else{
+                return false;
+            }
+        } else
+            return false;
+    }
+
+    /*
+    * fonction qui permet au createur de la liste de valider une de ses listes,
+    * meme si la date de fin n'est pas arrivé
+    */
+    public function ValidateList(Request $request, Response $response, $args){
+        $liste=Lists::where("id","=",$args['id'])->first();
+        if(isset($liste)){
+            $liste->isValidate=true;
+            $liste->validityDate=date('Y-m-d H:i:s');
+            $liste->token=null;
+            if($liste->save())
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+      
 }
 
 
