@@ -7,6 +7,25 @@
     float:right;
     margin-top : 50px;
 }
+
+@media (max-width: 577px) {
+    .textRight{
+        margin-top:90px;
+    }
+}
+
+nav+h2{
+    margin: 15px 0;
+}
+
+.titleLists{
+    color : #9900ff;
+}
+
+.titleLists+hr{
+    margin-bottom: 25px;
+}
+
 /*css du formulaire*/
 
 .form-style-1 {
@@ -67,7 +86,3 @@ select{
     width: 100%;
     margin: 2% 0;
 }
-
-/* menu déroulant de la nav dans page co*/
-
-

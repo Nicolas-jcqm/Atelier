@@ -6,6 +6,7 @@
     <title>Mecado</title>
     <link href="style/Mecado.css" rel="stylesheet">
     <link href="style/scss/main.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -33,21 +34,27 @@
 </nav>
 
 <h2>Voici toutes vos listes</h2>
+
 <div>
     {%  if listsArray |length > 0 %}
-        <div>
+        <div class="row bcg">
             {% for lists in listsArray %}
-                <div class="col col-span-12 bcg-col">
-                    <h1>Titre</h1> <p>{{ lists.title}} </p>
-                    <h2>Description</h2> <p>{{ lists.description }}</p>
+                <div class="col col-span-6 bcg-col">
+                    <h1 class = "titleLists">{{ lists.title}}</h1>
+                    <hr>
+                    <h4  class = "titleLists">Description</h4> <p>{{ lists.description }}</p>
                     <button type="button" class="btn-link textRight">Afficher le contenu de la liste</button>
-                    <h3>Date de validité</h3> <p>{{ lists.validityDate }}</p>
+                    <div class="text-left">
+                        <h4 class = "titleLists">Date de validité</h4> <p>{{ lists.validityDate }}</p>
                     </div>
+                </div>
             {% endfor %}
         </div>
 
-    {% endif %}
 </div>
+
+    {% endif %}
+
 </body>
 
 </html>
