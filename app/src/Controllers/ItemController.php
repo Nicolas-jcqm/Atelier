@@ -56,7 +56,6 @@ final class ItemController
     public function viewItem(Request $request, Response $response, $args){
         
         $item = Item::where("idList","=",$args['id'])->get();
-    
         $url = $this->router->pathFor('itemadd');
             
         $creator = Creator::find($_SESSION['creatorCo']);

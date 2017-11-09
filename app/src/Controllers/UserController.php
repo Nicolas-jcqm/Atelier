@@ -119,6 +119,7 @@ final class UserController
                     $_SESSION['creatorCo']=$creator->id;
 
                     return $response->withRedirect($this->router->pathFor('homeCo'));
+
                     //page twig avec la home connexion
                 }
                 else{
