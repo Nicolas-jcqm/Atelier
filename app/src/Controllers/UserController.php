@@ -119,6 +119,7 @@ final class UserController
                     $_SESSION['creatorCo']=$creator->id;
 
                     return $response->withRedirect($this->router->pathFor('homeCo'));
+
                     //page twig avec la home connexion
                 }
                 else{
@@ -145,6 +146,7 @@ final class UserController
     public function homeCo(Request $request, Response $response, $args){
         $creator = Creator::find($_SESSION['creatorCo']);
         $listsArray = Lists::where('idCreator','=',$creator->id)->get();
+
         return $this->view->render($response, 'homeCo.twig', ["creator"=>$creator,  "listsArray"=>$listsArray] );
     }
 
