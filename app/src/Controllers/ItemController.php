@@ -6,8 +6,10 @@ use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\Item;
-use App\Models\Creator;
+use App\Models\Booking;
 use App\Models\Lists;
+use App\Models\Creator;
+use App\Models\Comment;
 
 final class ItemController
 {
@@ -59,6 +61,9 @@ final class ItemController
         $creator = Creator::find($_SESSION['creatorCo']);
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
+        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
+
+        $creator = Creator::find($_SESSION['creatorCo']);
         
         $formcrea = "aucun";
         
@@ -74,7 +79,7 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
     
@@ -95,9 +100,9 @@ final class ItemController
     }
 
 
-    /* Reservation d'un item*/
-    public function bookItem(Request $request, Response $response, $args){
 
-    }
-    
- }
+
+
+
+
+}
