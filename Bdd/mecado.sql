@@ -58,8 +58,8 @@ CREATE TABLE `comment` (
   `senderName` varchar(50) NOT NULL,
   `content` varchar(200) NOT NULL,
   `idList` VARCHAR(100) NOT NULL,
-  `updated_at` DATE NOT NULL,
-  `created_at` DATE NOT NULL
+  `updated_at` DATETIME NOT NULL,
+  `created_at` DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
