@@ -53,3 +53,4 @@ $app->get('/homeCo/{id}/ValidateList','App\Controllers\ListeController:ValidateL
 //creation d'une liste
 $app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);
 $app->post('/creatList', 'App\Controllers\ListeController:validation_creatList');
+//en cas d'erreur

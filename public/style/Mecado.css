@@ -26,6 +26,10 @@ nav+h2{
     margin-bottom: 25px;
 }
 
+/*css bouton no link*/
+.no-link{
+    text-decoration: none;
+}
 /*css du formulaire*/
 
 .form-style-1 {
@@ -96,7 +100,9 @@ select{
     height: 100%;
     box-shadow: 0px 0px 30px #BBB;
 }
-
+.listItemCreator{
+    margin-left: 5%;
+}
 .item{
     display: flex;
     flex-wrap: wrap;
