@@ -11,6 +11,7 @@ namespace App\Controllers;
 use App\Models\Item;
 use App\Models\Lists;
 use App\Models\Booking;
+use App\Models\Comment;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -42,7 +43,6 @@ class GuestsListController
 
 
         $idBook= Booking::select('idItem')->get();
-
         $exist=true;
         foreach ($listItem as $key=>$val2){
             foreach ($idBook as $key=>$val){
@@ -51,19 +51,14 @@ class GuestsListController
                 if( $val->idItem === $val2->id ){
                    $exist=false;
                     break;
-
-
                 }
             }
             if($exist){
                 array_push($listItemNoBook,$val2);
             }
             $exist=true;
-
         }
-
         return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurArray,$args,"item"=>$listItemNoBook]);
-
     }
     public function bookItem(Request $request, Response $response, $args){
         $parsedBody = $request;

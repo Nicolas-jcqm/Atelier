@@ -31,7 +31,6 @@
     </nav>
 
     <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
-
     <br>
     <div style="background-color: #FFF0F5">
 
@@ -74,6 +73,7 @@
             </div>
 
         {% endif %}
+
     <div class="formulaire-item">
         <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
@@ -88,9 +88,14 @@
             <input type="file" name="FTU" />
             <input type="submit" class="btn-link btn-flat" name="valid" value="valider" />
 
-
         </form>
     </div>
+    
+    {% else %}
+    <div class="itemlogoff">
+        <p>Vous devez etre connecté en tant que créateur pour ajouter des items la liste de cadeau</p>
+    </div>
+    {% endif %}
 
     <h2 style="margin: 1% 1%;" class="text-center">Voici la liste de vos items</h2>
     <div class="row listItemCreator">
@@ -99,14 +104,30 @@
             <div class="item col col-span-6 bcg-col">
                 <div class="info-item">
                     <h4>{{ipo.title}}</h4>
+                    
                     <h6>Description :</h6>
-                    <p>{{ipo.description}}</p>
+                    {% if ipo.description %}
+                        <p>{{ipo.description}}</p>
+                    {% else %}
+                        <p>Aucune description</p>
+                    {% endif %}
+                    
                     <h6>Prix :</h6>
                     <p>{{ipo.price}} €</p>
+                    
                     <h6>Url :</h6>
-                    <p>{{ ipo.url }}</p>
+                    {% if ipo.url %}
+                        <p>{{ ipo.url }}</p>
+                    {% else %}
+                        <p>Aucune url</p>
+                    {% endif %}
                     <h6>Groupe actuel :</h6>
-                    <p>{{ ipo.idGroup }}</p>
+                    {% if ipo.idGroup %}
+                        <p class="colorGroup">{{ ipo.nameGroup }}({{ ipo.idGroup }})</p>
+                    {% else %}
+                        <p>Aucun groupe</p>
+                    {% endif %}
+                    
                     <label>Groupe cette item :</label>
                     <input type="checkbox" name="check[]" value="{{ ipo.id }}">
                     <input type="hidden" name="idlist" value="{{ ipo.idList }}">
@@ -116,7 +137,6 @@
                 </div>
             </div>
             {% endfor %}
-            
             <button class="btn-link btn-flat" type="submit">Groupe les items sélectionners</button>
         </form>
         </div>
@@ -125,7 +145,6 @@
     <div style="background-color: #FFF0F5">
     {%include('comment.twig')%}
         </div>
-
 </body>
 
 </html>

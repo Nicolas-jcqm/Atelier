@@ -159,3 +159,35 @@ select{
     margin-bottom: 10px;
     
 }
+
+.recipient img{
+    height:100px;
+    width:200px;
+    float: right;
+}
+
+.colorGroup{
+    color:green;
+    font-size: 30px;
+}
+
+.groupform{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.groupform > input{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.groupform > p{
+    font-size: 30px;
+    
+}
+
+.sizeLow{
+    font-size: 15px;
+}

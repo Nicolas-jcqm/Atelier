@@ -43,7 +43,7 @@ $app->get('/homeCo/{id}/generateSharingFinalToken','App\Controllers\ListeControl
 
 $app->get('/liste/{id}/commentList','App\Controllers\ListeController:commentList')->setName('comment');
 
-$app->post('/homeCo/{id}/addComment','App\Controllers\ListeController:addCommentList');
+$app->post('/viewGuest/{token}/addComment','App\Controllers\ListeController:addCommentList');
 
 $app->get('/liste/{id}/checkAndUpValidityDate','App\Controllers\ListeController:checkAndUpValidityDate')->setName('checklistdate');
 
@@ -53,4 +53,6 @@ $app->get('/homeCo/{id}/ValidateList','App\Controllers\ListeController:ValidateL
 //creation d'une liste
 $app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);
 $app->post('/creatList', 'App\Controllers\ListeController:validation_creatList');
+
 //en cas d'erreur
+$app->get('/youreceivedgifts/{token}', 'App\Controllers\RecipientController:displayRecipient')->setName('viewRecipient');

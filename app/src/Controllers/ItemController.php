@@ -114,10 +114,7 @@ final class ItemController
 
 
            }
-       }
-
-
-        
+       }        
     }
     
     public function viewItem(Request $request, Response $response, $args){
@@ -126,32 +123,25 @@ final class ItemController
         $creator = Creator::find($_SESSION['creatorCo']);
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
-        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
         $liste = Lists::where("id","=", $args["id"])->first();
         $creator = Creator::find($_SESSION['creatorCo']);
         
         $formcrea = "aucun";
         
-        /*
+        
         if(isset($_SESSION['creatorCo'])){
-            $CreaRequest = Lists::where("id", "=", $args['id'])->get(['idCreator']);
-            if ($CreaRequest == $_SESSION['creatorCo']) {
+            $CreaRequest = Lists::where("id", "=", $args['id'])->first(['idCreator']);
+            if ($CreaRequest->idCreator == $_SESSION['creatorCo']) {
                 $formcrea = "ok";
             }
         }
-        var_dump($_SESSION['creatorCo']);
-        var_dump($CreaRequest);$this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea,'erreurs'=>$erreurArray]);
-
-        var_dump($formcrea);
-        */
         $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea,'erreurs'=>$erreurArray]);
-
     }
     
     public function groupItem(Request $request, Response $response, $args){
        
         var_dump($request->getParsedBodyParam("check"));
-
+        $nameGroup = $request->getParsedBodyParam("nameGroup");
         $check = $request->getParsedBodyParam("check");
         $idgroupGenerate = uniqid();
         $size = count($check);
@@ -159,15 +149,9 @@ final class ItemController
 
         for($i=0; $i < $size ; $i++){
             Item::where('id', '=', $check[$i])->update(['idGroup' => $idgroupGenerate]);
+            Item::where('id', '=', $check[$i])->update(['nameGroup' => $nameGroup]);
         }
         
         return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idlist")]));
     }
-
-
-
-
-
-
-
 }

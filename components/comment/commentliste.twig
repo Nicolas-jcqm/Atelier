@@ -1,0 +1,7 @@
+<div>
+    {% for com in comment %}
+        Nom: {{com.senderName}}<br>
+        Message: {{com.content}}<br>
+        Posté le {{com.created_at|date('d/m/Y')}} à {{com.created_at|date_modify('+ 1 hour')|date('H:i:s')}} (UTC+1)<br><br>
+    {% endfor %}
+</div>
