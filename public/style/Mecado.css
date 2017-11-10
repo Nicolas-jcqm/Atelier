@@ -153,3 +153,9 @@ select{
     margin-bottom: 10px;
     
 }
+
+.recipient img{
+    height:100px;
+    width:200px;
+    float: right;
+}
