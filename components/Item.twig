@@ -73,7 +73,7 @@
             </div>
 
         {% endif %}
-
+{% if formcrea == 'ok' %}
     <div class="formulaire-item">
         <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
@@ -142,9 +142,7 @@
         </div>
     </div>
     <hr>
-    <div style="background-color: #FFF0F5">
-    {%include('comment.twig')%}
-        </div>
+
 </body>
 
 </html>

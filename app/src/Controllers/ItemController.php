@@ -135,7 +135,7 @@ final class ItemController
                 $formcrea = "ok";
             }
         }
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea,'erreurs'=>$erreurArray]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea,'erreurs'=>$erreurArray]);
     }
     
     public function groupItem(Request $request, Response $response, $args){

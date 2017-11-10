@@ -32,7 +32,7 @@ class GuestsListController
 
     }
 
-    public function displayListGuest(Request $request, Response $response, $args,$erreurArray){
+    public function displayListGuest(Request $request, Response $response, $args, $erreurArray){
 
 
         $listItemNoBook=array();
