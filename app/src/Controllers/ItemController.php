@@ -10,7 +10,6 @@ use App\Models\Booking;
 use App\Models\Lists;
 use App\Models\Creator;
 use App\Models\Comment;
-use App\Models\Lists;
 
 final class ItemController
 {
