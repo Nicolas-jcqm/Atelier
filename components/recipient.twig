@@ -16,10 +16,10 @@
     </div>
 </header>
 
-    <h1>Vous avez reçu des cadeaux !!!! </h1>
+    {%  if itemsBooked |length > 0 %}
+        <h1>Vous avez reçu des cadeaux !!!! </h1>
 
-    <section class = "recipient">
-        {%  if itemsBooked |length > 0 %}
+        <section class = "recipient">
             <div class="row bcg">
                 {% for i in itemsBooked %}
                     <div class="col col-span-6 bcg-col">
@@ -32,8 +32,11 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
-    </section>
+        </section>
+    {% else %}
+        <h1>Liste en cours de traitement</h1>
+    {% endif %}
+
 
 </body>
 

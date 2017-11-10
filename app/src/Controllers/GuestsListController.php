@@ -34,7 +34,9 @@ class GuestsListController
         $this->tools = new Tools();
     }
 
-    public function displayListGuest(Request $request, Response $response, $args){
+    public function displayListGuest(Request $request, Response $response, $args, $erreurArray=null){
+
+
         $listItemNoBook=array();
         $url_form = $this->router->pathFor('viewGuest',["token"=>$args['token']]);
 
@@ -43,7 +45,6 @@ class GuestsListController
 
 
         $idBook= Booking::select('idItem')->get();
-
         $exist=true;
         foreach ($listItem as $key=>$val2){
             foreach ($idBook as $key=>$val){
@@ -52,15 +53,12 @@ class GuestsListController
                 if( $val->idItem === $val2->id ){
                    $exist=false;
                     break;
-
-
                 }
             }
             if($exist){
                 array_push($listItemNoBook,$val2);
             }
             $exist=true;
-
         }
         var_dump($listItemNoBook);
         $comment= Comment::where('idlist','=',$listItemGuestsId->id)->latest()->get();
@@ -71,7 +69,7 @@ class GuestsListController
         $parsedBody = $request;
         $erreurArray=array();
 
-        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Reserver cette item" ) {
+        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Reserver" ) {
             $reserverName = $parsedBody->getParsedBodyParam('reserverName');
             $message = $parsedBody->getParsedBodyParam('message');
             $idItem= $parsedBody->getParsedBodyParam('iditem');
@@ -86,11 +84,11 @@ class GuestsListController
                 }
             }
             if(empty($message)){
-                $erreurMessage="Merci d'entrer un nom";
+                $erreurMessage="Merci d'entrer un message";
                 array_push($erreurArray,$erreurMessage);
             }else{
                 if($message != filter_var($message, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)){
-                    $erreurMessageFiltre ="Merci d'entrer un prénom valide";
+                    $erreurMessageFiltre ="Merci d'entrer un message valide";
                     array_push($erreurArray,$erreurMessageFiltre);
                 }
             }
@@ -100,13 +98,15 @@ class GuestsListController
                 $book->id = uniqid();
                 $book->reserverName =$reserverName;
                 $book->message=$message;
-$book->idItem=$parsedBody->getParsedBodyParam('idItem');
-                var_dump( 'item', $idItem);
+                $book->idItem=$parsedBody->getParsedBodyParam('idItem');
                 $book->save();
 
-                $this->displayListGuest($request,  $response, $args);
+                $this->displayListGuest($request,  $response, $args, $erreurArray);
 
+            }
+            else{
 
+                return $this->displayListGuest( $request,  $response, $args, $erreurArray);
             }
 
         }

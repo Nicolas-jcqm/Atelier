@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 09 nov. 2017 à 15:57
+-- Généré le :  ven. 10 nov. 2017 à 14:19
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -89,6 +89,13 @@ CREATE TABLE IF NOT EXISTS `creator` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `creator`
+--
+
+INSERT INTO `creator` (`id`, `name`, `firstName`, `mail`, `password`) VALUES
+('5a047c8e892ef', 'marquant', 'lucas', 'lucas@hotmail.fr', '$2y$12$fsH/.WUa.vO6j40rJWs62uulOJaJiyf4G.dXPnSSNpR.WAb3kfelq');
+
 -- --------------------------------------------------------
 
 --
@@ -105,9 +112,20 @@ CREATE TABLE IF NOT EXISTS `item` (
   `picture` varchar(50) NOT NULL,
   `idGroup` varchar(100) NOT NULL,
   `idList` varchar(100) NOT NULL,
+  `nameGroup` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_item_idList` (`idList`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `item`
+--
+
+INSERT INTO `item` (`id`, `title`, `description`, `price`, `url`, `picture`, `idGroup`, `idList`, `nameGroup`) VALUES
+('5a047cb59f203', 'Titre', 'desc', 56, 'https://youtu.be/L4KyhhSRoKs', '2017-11-09-16-05-09.jpg', '5a05ac7b3c4d9', '5a047c9f0ca0f', 'test'),
+('5a047ccd6b4c6', 'test2', 'nvjfu', 90, 'http://sync.in/s', 'default.jpg', '5a05ac7b3c4d9', '5a047c9f0ca0f', 'test'),
+('5a047ce8ee3b1', 'tresd', 'ghkgi', 66, 'https://youtu.be/xfpiacvzACI', '2017-11-09-16-06-00.jpg', '5a05ac7b3c4d9', '5a047c9f0ca0f', 'test'),
+('5a05b3e36d2cd', 'Test', '', 14, '', 'default.jpg', '0', '5a047c9f0ca0f', '');
 
 -- --------------------------------------------------------
 
@@ -128,6 +146,13 @@ CREATE TABLE IF NOT EXISTS `list` (
   PRIMARY KEY (`id`),
   KEY `fk_list_idcreator` (`idCreator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `list`
+--
+
+INSERT INTO `list` (`id`, `title`, `description`, `validityDate`, `token`, `isRecipient`, `idCreator`, `isValidate`) VALUES
+('5a047c9f0ca0f', 'test', 'test', '2017-11-30', '88ebbbbfb9a63201cd106a7e93dc84ce', 4, '5a047c8e892ef', NULL);
 
 -- --------------------------------------------------------
 

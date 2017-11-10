@@ -8,14 +8,23 @@
     <link href="style/scss/main.css" rel="stylesheet">
 </head>
 <body>
+
 {%include('header.twig')%}
 {%include('navbar.twig')%}
+
 
 <div>
     <h2 class="text-center" style="margin-top: 2%;">Vous pouvez créer votre liste, ici.</h2>
 
 <form action="{{ url_form }}" method="post">
+    {%  if erreurs|length > 0 %}
+        <div>
+            {% for error in erreurs %}
+                <div class="alert-danger"><p>{{ error }}</p></div>
+            {% endfor %}
+        </div>
 
+    {% endif %}
     <ul class="form-style-1">
         <li>
             <label for="title">Votre Titre</label>
@@ -38,6 +47,7 @@
         </li>
 
     </ul>
+
 </form>
 </div>
 </body>

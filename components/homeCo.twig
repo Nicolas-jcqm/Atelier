@@ -10,8 +10,10 @@
 </head>
 
 <body>
+
 {%include('header.twig')%}
 {%include('navbar.twig')%}
+
 
 <h2>Voici toutes vos listes</h2>
 
@@ -23,7 +25,7 @@
                     <h1 class = "titleLists">{{ lists.title}}</h1>
                     <hr>
                     <h4  class = "titleLists">Description</h4> <p>{{ lists.description }}</p>
-                    <a href="/homeCo/{{lists.id}}/item" type="button" class="btn-link textRight">Afficher le contenu de la liste</a>
+                    <a href="/homeCo/{{lists.id}}/item" type="button" class=" no-link btn-link textRight">Afficher le contenu de la liste</a>
                     <div class="text-left">
                         <h4 class = "titleLists">Date de validité</h4> <p>{{ lists.validityDate }}</p>
                     </div>

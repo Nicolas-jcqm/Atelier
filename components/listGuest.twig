@@ -18,18 +18,46 @@
 
 
 <h2 class="text-center">Voici vos items</h2>
-<div class="container-item">
+<div>
+    {%  if erreurs|length > 0 %}
+        <div>
+            {% for error in erreurs %}
+                <div class="alert-danger"><p>{{ error }}</p></div>		{% endfor %}
+        </div>
+
+    {% endif %}
+</div>
+<div class=" row listItemCreator">
 
     {% for ipo in item %}
-        <div class="item">
-            <div class="info-item">
+        <div class="item col col-span-6 bcg-col">
+            <div class="info-item ">
                 <h4>{{ipo.title}}</h4>
-                <h6>Description :</h6>
-                <p>{{ipo.description}}</p>
-                <h6>Prix :</h6>
-                <p>{{ipo.price}} €</p>
-                <h6>Url :</h6>
-                <p>{{ ipo.url }}</p>
+                    
+                    <h6>Description :</h6>
+                    {% if ipo.description %}
+                        <p>{{ipo.description}}</p>
+                    {% else %}
+                        <p>Aucune description</p>
+                    {% endif %}
+                    
+                    <h6>Prix :</h6>
+                    <p>{{ipo.price}} €</p>
+                    
+                    <h6>Url :</h6>
+                    {% if ipo.url %}
+                        <p>{{ ipo.url }}</p>
+                    {% else %}
+                        <p>Aucune url</p>
+                    {% endif %}
+                    <h6>Groupe actuel :</h6>
+                    {% if ipo.idGroup %}
+                        <p class="colorGroup">{{ ipo.nameGroup }}
+                        <p class="sizeLow">({{ ipo.idGroup }})</p>
+                        </p>
+                    {% else %}
+                        <p>Aucun groupe</p>
+                    {% endif %}
             </div>
             <div class="info-img">
                 <img class="image-item" src="/img/{{ipo.picture}}">
@@ -45,13 +73,13 @@
                     </li>
                     <li>
                         <label for="message">Votre message</label>
-                        <input style="height: 100px;" class="field-long" type="text" required name="message" id="message">
-                    </li>
-                    <li class=" text-center">
-                        <input class="btn-link btn-flat" type="submit" name="envoi" value="Reserver cette item">
+                        <textarea style="height: 100px;" class="field-long" type="text" required name="message" id="message"></textarea>
                     </li>
                     <li class=" text-center">
                         <input class="btn-link btn-flat" type="hidden" name="idItem" id="idItem" value="{{ ipo.id }}">
+                    </li>
+                    <li class=" text-center">
+                        <input class="btn-link btn-flat" type="submit" name="envoi" value="Reserver">
                     </li>
                 </ul>
             </form>

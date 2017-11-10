@@ -67,7 +67,10 @@ final class ListeController
     }
 
     public function validation_creatList(Request $request, Response $response, $args){
+        $creator = Creator::find($_SESSION['creatorCo']);
+
         $parsedBody = $request;
+        $erreurArray=array();
         var_dump('ok',$parsedBody->getParsedBodyParam('checkbox'));
 
         if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Envoyer" ){
@@ -76,27 +79,59 @@ final class ListeController
             $validityDate=$parsedBody->getParsedBodyParam('validityDate');
             $checkbox=$parsedBody->getParsedBodyParam('checkbox');
 
+            /**gerer erreurs*/
+            if(empty($title)){
+                $erreurTitre="Merci d'entrer un titre";
+                array_push($erreurArray,$erreurTitre);
+            }else{
+                if($title != filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)){
+                    $erreurTitreFiltre ="Merci d'entrer un titre valide";
+                    array_push($erreurArray,$erreurTitreFiltre);
+                }
+            }
+            if(empty($description)){
+                $erreurDesc="Merci d'entrer une description";
+                array_push($erreurArray,$erreurDesc);
+            }else{
+                if($description != filter_var($description, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)){
+                    $erreurDescFiltre ="Merci d'entrer un titre valide";
+                    array_push($erreurArray,$erreurDescFiltre);
+                }
+            }
+            if(empty($validityDate)){
+                $erreurDate='Veuillez entrez une date';
+                array_push($erreurArray, $erreurDate);
+            }else{
+                if(strtotime(date("d-m-Y"))>=strtotime($validityDate)){
+                    $erreurDateFiltre="Veuillez entrez une date qui n'est pas egale ou enterieure à celle d'aujourd'hui";
+                    array_push($erreurArray, $erreurDateFiltre);
+                }
+            }
 
 
             if($checkbox === NULL){
-
-                $checkbox=1;
+                $checkbox=0;
 
             }else{
-                $checkbox=0;
+                $checkbox=1;
             }
+            if (sizeof($erreurArray)===0) {
+                $list = new Lists();
+                $list->id = uniqid();
+                $list->title = $title;
+                $list->description = $description;
+                $list->validityDate = $validityDate;
+                $list->token = null;
+                $list->isRecipient = $checkbox;
+                $list->idCreator = $_SESSION['creatorCo'];
+                $list->save();
+                return $response->withRedirect($this->router->pathFor('homeCo'));
+            }
+            else{
+                $url_form = $this->router->pathFor('creatList');
 
-            $list = new Lists();
-            $list->id = uniqid();
-            $list->title=$title;
-            $list->description=$description;
-            $list->validityDate=$validityDate;
-            $list->token=null;
-            $list->isRecipient=$checkbox;
-            $list->idCreator=$_SESSION['creatorCo'];
-            $list->save();
-            return $response->withRedirect($this->router->pathFor('homeCo'));
-
+                return $this->view->render($response, 'CreatList.twig', ["url_form"=>$url_form,'erreurs'=>$erreurArray, "creator"=>$creator]);
+            }
         }
 
     }

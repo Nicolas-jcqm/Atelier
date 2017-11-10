@@ -7,10 +7,19 @@
     <link href="style/scss/main.css" rel="stylesheet">
 </head>
 <body>
+
 {%include('header.twig')%}
+
 <div>
     <h2 class="text-center" style="margin-top: 2%;">Connectez vous, ici.</h2>
+    {%  if erreurs|length > 0 %}
+        <div>
+            {% for error in erreurs %}
+                <div class="alert-danger"><p>{{ error }}</p></div>
+            {% endfor %}
+        </div>
 
+    {% endif %}
     <form action="{{ url_form }}" method="post">
     <ul class="form-style-1">
         <li>
@@ -27,16 +36,14 @@
 
     </ul>
 
-    {%  if erreurs|length > 0 %}
-        <div>
-            {% for error in erreurs %}
-                <p>{{ error }}</p>
-            {% endfor %}
-        </div>
 
-    {% endif %}
 
 </form>
+</div>
+<hr style="height: 1px;">
+<div class="row ">
+    <p class="small" style="margin: 1% 1%">Vous n'avez pas encore de compte ? Il ne vous reste plus qu'a en créer un ! </p>
+    <a style="margin-bottom: 1%;" href="/signup" class=" no-link btn-small btn-link">S' inscrire</a>
 </div>
 </body>
 </html>
