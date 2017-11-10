@@ -54,4 +54,5 @@ $app->get('/homeCo/{id}/ValidateList','App\Controllers\ListeController:ValidateL
 $app->get('/creatList', 'App\Controllers\ListeController:creatList')->setName('creatList')->add($middleware_need_co);
 $app->post('/creatList', 'App\Controllers\ListeController:validation_creatList');
 
+//en cas d'erreur
 $app->get('/youreceivedgifts/{token}', 'App\Controllers\RecipientController:displayRecipient')->setName('viewRecipient');

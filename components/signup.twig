@@ -14,8 +14,8 @@
 	<div class="header">
 		<div><h1>Mecado</h1></div>
 		<div  class="text-right btnLogNav">
-			<a href="/signup" class="btn-link btn-flat text-center">S'incrire</a>
-			<a href="/signin" class="btn-link btn-flat">Se connecter</a>
+			<a href="/signup" class="no-link btn-link btn-flat text-center">S'incrire</a>
+			<a href="/signin" class="no-link btn-link btn-flat">Se connecter</a>
 		</div>
 	</div>
 
@@ -33,7 +33,13 @@
 <h2 class="text-center" style="margin-top: 2%;">Inscrivez vous, des maintenant.</h2>
 
 <form action="{{ url_form }}" method="post">
+	{%  if erreurs|length > 0 %}
+		<div>
+			{% for error in erreurs %}
+				<div class="alert-danger"><p>{{ error }}</p></div>		{% endfor %}
+		</div>
 
+	{% endif %}
 	<ul class="form-style-1">
 		<li>
 			<label for="name">Votre nom</label>
@@ -56,19 +62,12 @@
 		</li>
 
 		</ul>
-	{%  if erreurs|length > 0 %}
-	<div>
-		{% for error in erreurs %}
-		<p>{{ error }}</p>
-		{% endfor %}
-	</div>
 
-	{% endif %}
 </form>
 	<hr style="height: 1px;">
 	<div class="row ">
 		<p class="small" style="margin: 1% 1%">Déjà inscrit ? Il ne vous reste plus qu'a vous connecter ! </p>
-		<a href="/signin" class="btn-small">Se connecter</a>
+		<a style="margin-bottom: 1%;" href="/signin" class=" no-link btn-small btn-link">Se connecter</a>
 	</div>
 </div>
 </body>

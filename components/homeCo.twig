@@ -19,7 +19,7 @@
 
         <div  class="text-right btnLogNav ">
 
-            <a href="/disconnect" class="btn-link btn-flat">Se deconnecter</a>
+            <a href="/disconnect" class="no-link btn-link btn-flat">Se deconnecter</a>
 
         </div>
     </div>
@@ -28,7 +28,7 @@
 <nav>
     <ul class="navbar bcg">
         <li><a href="/creatList">Créer liste</a></li>
-        <li><a href="/HomeCo">Visualiser liste</a></li>
+        <li><a href="/homeCo">Visualiser liste</a></li>
     </ul>
 </nav>
 
@@ -42,7 +42,7 @@
                     <h1 class = "titleLists">{{ lists.title}}</h1>
                     <hr>
                     <h4  class = "titleLists">Description</h4> <p>{{ lists.description }}</p>
-                    <a href="/homeCo/{{lists.id}}/item" type="button" class="btn-link textRight">Afficher le contenu de la liste</a>
+                    <a href="/homeCo/{{lists.id}}/item" type="button" class=" no-link btn-link textRight">Afficher le contenu de la liste</a>
                     <div class="text-left">
                         <h4 class = "titleLists">Date de validité</h4> <p>{{ lists.validityDate }}</p>
                     </div>

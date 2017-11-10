@@ -11,47 +11,69 @@
 <body>
     <header>
         <div class="header">
-            <h1>Mecado</h1>
             <div>
-                <p>bonjour {{ creator.name }}</p>
+                <h1>Mecado</h1>
+                <h6>Bonjour, {{ creator.name }} {{ creator.firstName }} !</h6>
             </div>
-            <a href="/disconnect" class="btn btn-small">Se deconnecter</a>
-        </div>
 
+            <div  class="text-right btnLogNav ">
+
+                <a href="/disconnect" class="no-link btn-link btn-flat">Se deconnecter</a>
+
+            </div>
+        </div>
     </header>
     <nav>
         <ul class="navbar bcg">
             <li><a href="/creatList">Créer liste</a></li>
             <li><a href="/homeCo">Visualiser liste</a></li>
-            <li><a href="#">Partager liste</a></li>
         </ul>
     </nav>
 
     <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
-    <br> {% if liste.isValidate %} {% if liste.token is null %}
-    <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
-            Générez le lien cadeau :
-            </button></a> {% else %}
-    <a><button class='btn-secondary btn-flat'>
-            {% if liste.isRecipient %}
-                Voici votre lien de cadeau :
-            {% else %}
-                Donnez ce lien au bénéficiaire de la liste :
-            {% endif %}
-            </button></a>
-    <a href='/youreceivedgifts/{{liste.token}}'>Accès à la liste finale</a> {% endif %} {% else %} {% if liste.token is null %}
-    <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
-            Générez votre lien de partage :
-            </button></a> {% else %}
-    <a><button class='btn-secondary btn-flat'>
-            Partagez ce lien à vos amis : 
-            </button></a>
-    <a href='/viewGuest/{{liste.token}}'>Accès à la liste de participation</a> {% endif %} {% endif %} {% if liste.isValidate==false %}
+    <br>
+    <div style="background-color: #FFF0F5">
+
+    <h2 style="margin: 1% 1%;" class="text-center">Partager votre liste</h2>
+    {% if liste.isValidate %}
+        {% if liste.token is null %}
+            <a style="margin: 1% 2%;" href="generateSharingFinalToken"><button style="margin: 1% 2%;" class='btn-secondary btn-flat'>
+            Générez le token cadeau :</button></a>
+        {% else %}
+            <a><button  style="margin: 1% 2%;" class='btn-secondary btn-flat'>
+            Donnez ce lien au bénéficiaire de la liste :</button></a>
+        {% endif %}
+    {% else %}
+        {% if liste.token is null %}
+            <a  style="margin: 1% 2%;" href="generateSharingToken"><button class='btn-secondary btn-flat'>
+            Générez votre token de partage :</button></a>
+        {% else %}
+            <a style="margin: 1% 2%;"><button   style="margin: 1% 2%;" class='btn-secondary btn-flat'>
+            Partagez ce lien à vos amis :</button></a>
+        {% endif %}
+    {% endif %}
+
+    <input type="text" value='{{liste.token}}' readonly>
+    {% if liste.isValidate==false %}
+        <br><br>
+        <a style="margin: 1% 2%;" href="ValidateList"> <button  style="margin: 1% 2%;" class='btn-warning btn-flat'>Cloturer la liste en avance</button></a>
+    {% endif%}
     <br><br>
-    <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a> {% endif%}
-    <br><br>
-    
-    {% if formcrea == 'ok' %}
+
+
+    </div>
+<hr>
+    <div style="background-color: #FFF0F5">
+        <h2 style="margin: 1% 1%;" class="text-center">Ajouter un item</h2>
+        {%  if erreurs|length > 0 %}
+            <div>
+                {% for error in erreurs %}
+                    <div class="alert-danger"><p>{{ error }}</p></div>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
     <div class="formulaire-item">
         <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
@@ -64,7 +86,8 @@
             <input type="text" name="url" />
             <input type="hidden" name="idform" value="{{ idlist }}" />
             <input type="file" name="FTU" />
-            <input type="submit" name="valid" value="valider" />
+            <input type="submit" class="btn-link btn-flat" name="valid" value="valider" />
+
         </form>
     </div>
     
@@ -74,11 +97,11 @@
     </div>
     {% endif %}
 
-    <h2 class="text-center">Voici vos items</h2>
-    <div class="container-item">
+    <h2 style="margin: 1% 1%;" class="text-center">Voici la liste de vos items</h2>
+    <div class="row listItemCreator">
         <form action="/group_item" method="post">
             {% for ipo in item %}
-            <div class="item">
+            <div class="item col col-span-6 bcg-col">
                 <div class="info-item">
                     <h4>{{ipo.title}}</h4>
                     
@@ -114,13 +137,14 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="groupform">
-                <p>Nom du groupe :</p>
-                <input type="text" name="nameGroup" />
-                <button type="submit">Groupe les items sélectionners</button>
-            </div>
+            <button class="btn-link btn-flat" type="submit">Groupe les items sélectionners</button>
         </form>
+        </div>
     </div>
+    <hr>
+    <div style="background-color: #FFF0F5">
+    {%include('comment.twig')%}
+        </div>
 </body>
 
 </html>

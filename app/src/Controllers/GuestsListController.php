@@ -32,7 +32,9 @@ class GuestsListController
 
     }
 
-    public function displayListGuest(Request $request, Response $response, $args){
+    public function displayListGuest(Request $request, Response $response, $args,$erreurArray){
+
+
         $listItemNoBook=array();
         $url_form = $this->router->pathFor('viewGuest',["token"=>$args['token']]);
 
@@ -56,16 +58,13 @@ class GuestsListController
             }
             $exist=true;
         }
-        
-        $comment= Comment::where('idlist','=',$listItemGuestsId->id)->latest()->get();
-        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]);
-
+        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurArray,$args,"item"=>$listItemNoBook]);
     }
     public function bookItem(Request $request, Response $response, $args){
         $parsedBody = $request;
         $erreurArray=array();
 
-        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Reserver cette item" ) {
+        if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Reserver" ) {
             $reserverName = $parsedBody->getParsedBodyParam('reserverName');
             $message = $parsedBody->getParsedBodyParam('message');
             $idItem= $parsedBody->getParsedBodyParam('iditem');
@@ -80,11 +79,11 @@ class GuestsListController
                 }
             }
             if(empty($message)){
-                $erreurMessage="Merci d'entrer un nom";
+                $erreurMessage="Merci d'entrer un message";
                 array_push($erreurArray,$erreurMessage);
             }else{
                 if($message != filter_var($message, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)){
-                    $erreurMessageFiltre ="Merci d'entrer un prénom valide";
+                    $erreurMessageFiltre ="Merci d'entrer un message valide";
                     array_push($erreurArray,$erreurMessageFiltre);
                 }
             }
@@ -94,13 +93,16 @@ class GuestsListController
                 $book->id = uniqid();
                 $book->reserverName =$reserverName;
                 $book->message=$message;
-$book->idItem=$parsedBody->getParsedBodyParam('idItem');
-                var_dump( 'item', $idItem);
+                $book->idItem=$parsedBody->getParsedBodyParam('idItem');
                 $book->save();
 
                 $this->displayListGuest($request,  $response, $args);
 
+                echo $erreurArray;
+            }
+            else{
 
+                return $this->displayListGuest( $request,  $response, $args,$erreurArray);
             }
 
         }

@@ -14,8 +14,8 @@
     <div class="header">
         <div><h1>Mecado</h1></div>
         <div  class="text-right btnLogNav">
-            <a href="/signup" class="btn-link btn-flat text-center">S'incrire</a>
-            <a href="/signin" class="btn-link btn-flat">Se connecter</a>
+            <a href="/signup" class="no-link btn-link btn-flat text-center">S'incrire</a>
+            <a href="/signin" class="no-link btn-link btn-flat">Se connecter</a>
         </div>
 
     </div>
@@ -29,11 +29,20 @@
 
 
 <h2 class="text-center">Voici vos items</h2>
-<div class="container-item">
+<div>
+    {%  if erreurs|length > 0 %}
+        <div>
+            {% for error in erreurs %}
+                <div class="alert-danger"><p>{{ error }}</p></div>		{% endfor %}
+        </div>
+
+    {% endif %}
+</div>
+<div class=" row listItemCreator">
 
     {% for ipo in item %}
-        <div class="item">
-            <div class="info-item">
+        <div class="item col col-span-6 bcg-col">
+            <div class="info-item ">
                 <h4>{{ipo.title}}</h4>
                     
                     <h6>Description :</h6>
@@ -75,13 +84,13 @@
                     </li>
                     <li>
                         <label for="message">Votre message</label>
-                        <input style="height: 100px;" class="field-long" type="text" required name="message" id="message">
-                    </li>
-                    <li class=" text-center">
-                        <input class="btn-link btn-flat" type="submit" name="envoi" value="Reserver cette item">
+                        <textarea style="height: 100px;" class="field-long" type="text" required name="message" id="message"></textarea>
                     </li>
                     <li class=" text-center">
                         <input class="btn-link btn-flat" type="hidden" name="idItem" id="idItem" value="{{ ipo.id }}">
+                    </li>
+                    <li class=" text-center">
+                        <input class="btn-link btn-flat" type="submit" name="envoi" value="Reserver">
                     </li>
                 </ul>
             </form>
