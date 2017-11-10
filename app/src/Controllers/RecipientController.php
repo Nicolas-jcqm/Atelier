@@ -33,31 +33,35 @@ class RecipientController
 
     public function returnItemBooked($token){
         // Renvoi l'id List associé au Token
-        $idList = Lists::select('id')->where('token','=',$token)->first();
-        $resIdList = $idList;
-        // Renvoi la liste des item dans la liste
-        $ListItem = Item::where('idList','=',$resIdList->id)->get();
-        // renvoi des réservations
-        $booking = Booking::select('idItem','message', 'reserverName')->get();
-        // Renvoi des Items de la liste, qui sont réservés
-        $idItemBoo = array();
-        foreach ($ListItem as $k=>$v){
-            $isBooked = false;
-            foreach ($booking as $k2=>$v2){
-                $array = array();
-                if($v->id === $v2->idItem){
-                    $array = array("title"=>$v->title,"description"=>$v->description,"picture"=>$v->picture, "reserver"=>$v2->reserverName, "message"=>$v2->message);
-                    array_push($idItemBoo,$array);
+        $idList = Lists::select('id','isValidate')->where('token','=',$token)->first();
+        if($idList->isValidate === 1) {
+            $resIdList = $idList;
+            // Renvoi la liste des item dans la liste
+            $ListItem = Item::where('idList', '=', $resIdList->id)->get();
+            // renvoi des réservations
+            $booking = Booking::select('idItem', 'message', 'reserverName')->get();
+            // Renvoi des Items de la liste, qui sont réservés
+            $idItemBoo = array();
+            foreach ($ListItem as $k => $v) {
+                $isBooked = false;
+                foreach ($booking as $k2 => $v2) {
+                    $array = array();
+                    if ($v->id === $v2->idItem) {
+                        $array = array("title" => $v->title, "description" => $v->description, "picture" => $v->picture, "reserver" => $v2->reserverName, "message" => $v2->message);
+                        array_push($idItemBoo, $array);
+                    }
                 }
             }
+            /**
+             * foreach ($idItemBoo as $k=>$v){
+             * foreach ($v as $k2=>$v2){
+             * echo $k2."      ".$v2."      <br>";
+             * }
+             * echo "<br>";
+             * } */
+        }else{
+            $idItemBoo = null;
         }
-    /**
-    foreach ($idItemBoo as $k=>$v){
-            foreach ($v as $k2=>$v2){
-                echo $k2."      ".$v2."      <br>";
-            }
-            echo "<br>";
-        } */
         return $idItemBoo;
     }
 
