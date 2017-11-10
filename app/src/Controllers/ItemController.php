@@ -10,18 +10,21 @@ use App\Models\Booking;
 use App\Models\Lists;
 use App\Models\Creator;
 use App\Models\Comment;
+use App\Controllers\Tools\Tools;
 
 final class ItemController
 {
     private $view;
     private $logger;
 	private $user;
+    private $tools;
 
      public function __construct($c)
     {
         $this->view = $c->get('view');
         $this->logger = $c->get('logger');
         $this->router = $c->get('router');
+        $this->tools = new Tools();
     }
 
    public function addItem(Request $request, Response $response, $args){
@@ -51,7 +54,7 @@ final class ItemController
         $url = $this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]);
         
         $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'ItemConfirmer.twig', ["creator" =>$creator, "url" =>$url]);
+        $this->view->render($response, 'ItemConfirmer.twig', $this->tools->AddVarToRender(["creator" =>$creator, "url" =>$url]));
         
         
     }
@@ -78,7 +81,7 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', $this->tools->AddVarToRender(["creator" =>$creator, "item" =>$item, "liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]));
         
     }
     

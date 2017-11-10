@@ -5,14 +5,14 @@ namespace App\Controllers;
 use App\Models\Lists;
 use App\Models\Creator;
 use App\Models\Comment;
-
+use App\Controllers\Tools\Tools;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\Eloquent\Model;
 
 final class ListeController
 {
-
+    private $tools;
     private $user;
     private $listsArray;
 
@@ -20,7 +20,7 @@ final class ListeController
     {
         $this->user;
         $this->listsArray = null;
-
+        $this->tools= new Tools();
         $this->view = $c->get('view');
         $this->logger = $c->get('logger');
         $this->model = $c->get('App\Repositories\UserRepository');
@@ -63,7 +63,7 @@ final class ListeController
     public function creatList(Request $request, Response $response, $args){
         $creator = Creator::find($_SESSION['creatorCo']);
         $url_form = $this->router->pathFor('creatList');
-        return $this->view->render($response, 'CreatList.twig', ["url_form"=>$url_form, "creator"=>$creator]);
+        return $this->view->render($response, 'CreatList.twig', $this->tools->AddVarToRender(["url_form"=>$url_form, "creator"=>$creator]));
     }
 
     public function validation_creatList(Request $request, Response $response, $args){

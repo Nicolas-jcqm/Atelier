@@ -9,23 +9,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <h1>Mecado</h1>
-            <div>
-                <p>bonjour {{ creator.name }}</p>
-            </div>
-            <a href="/disconnect" class="btn btn-small">Se deconnecter</a>
-        </div>
-
-    </header>
-    <nav>
-        <ul class="navbar bcg">
-            <li><a href="#">Créer liste</a></li>
-            <li><a href="#">partager liste</a></li>
-            <li><a href="#">AIDE</a></li>
-        </ul>
-    </nav>
+{%include('header.twig')%}
+{%include('navbar.twig')%}
     <div class="formulaire-item">
         <form class="form-item"     action="{{ url }}" method="get">
         <p>Votre item a été valider</p>

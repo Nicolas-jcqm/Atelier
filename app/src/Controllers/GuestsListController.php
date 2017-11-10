@@ -12,6 +12,7 @@ use App\Models\Item;
 use App\Models\Lists;
 use App\Models\Booking;
 use App\Models\Comment;
+use App\Controllers\Tools\Tools;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -22,6 +23,7 @@ class GuestsListController
     private $view;
     private $logger;
     private $router;
+    private $tools;
 
     public function __construct($c)
     {
@@ -29,7 +31,7 @@ class GuestsListController
         $this->logger = $c->get('logger');
         $this->model = $c->get('App\Repositories\UserRepository');
         $this->router = $c->get('router');
-
+        $this->tools = new Tools();
     }
 
     public function displayListGuest(Request $request, Response $response, $args){
@@ -62,7 +64,7 @@ class GuestsListController
         }
         var_dump($listItemNoBook);
         $comment= Comment::where('idlist','=',$listItemGuestsId->id)->latest()->get();
-        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]);
+        return $this->view->render($response, 'listGuest.twig', $this->tools->AddVarToRender(["url_form"=>$url_form,'erreurs'=>$erreurs=[],"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]));
 
     }
     public function bookItem(Request $request, Response $response, $args){
