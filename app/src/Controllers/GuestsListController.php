@@ -32,7 +32,7 @@ class GuestsListController
 
     }
 
-    public function displayListGuest(Request $request, Response $response, $args, $erreurArray){
+    public function displayListGuest(Request $request, Response $response, $args, $erreurArray=null){
 
 
         $listItemNoBook=array();
@@ -96,13 +96,12 @@ class GuestsListController
                 $book->idItem=$parsedBody->getParsedBodyParam('idItem');
                 $book->save();
 
-                $this->displayListGuest($request,  $response, $args);
+                $this->displayListGuest($request,  $response, $args, $erreurArray);
 
-                echo $erreurArray;
             }
             else{
 
-                return $this->displayListGuest( $request,  $response, $args,$erreurArray);
+                return $this->displayListGuest( $request,  $response, $args, $erreurArray);
             }
 
         }
