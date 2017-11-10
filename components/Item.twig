@@ -9,26 +9,10 @@
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <div>
-                <h1>Mecado</h1>
-                <h6>Bonjour, {{ creator.name }} {{ creator.firstName }} !</h6>
-            </div>
 
-            <div  class="text-right btnLogNav ">
+{%include('header.twig')%}
+{%include('navbar.twig')%}
 
-                <a href="/disconnect" class="no-link btn-link btn-flat">Se deconnecter</a>
-
-            </div>
-        </div>
-    </header>
-    <nav>
-        <ul class="navbar bcg">
-            <li><a href="/creatList">Créer liste</a></li>
-            <li><a href="/homeCo">Visualiser liste</a></li>
-        </ul>
-    </nav>
 
     <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
     <br>

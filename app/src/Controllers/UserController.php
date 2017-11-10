@@ -4,16 +4,17 @@ namespace App\Controllers;
 
 use App\Models\Creator;
 use App\Models\Lists;
-
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\Controllers\Tools\Tools;
 
 final class UserController
 {
     private $view;
     private $logger;
     private $router;
+    private $tools;
     
     public function __construct($c)
     {
@@ -21,7 +22,7 @@ final class UserController
         $this->logger = $c->get('logger');
         $this->model = $c->get('App\Repositories\UserRepository');
         $this->router = $c->get('router');
-
+        $this->tools = new Tools();
     }
 
     public function signup(Request $request, Response $response, $args)
@@ -147,7 +148,7 @@ final class UserController
         $creator = Creator::find($_SESSION['creatorCo']);
         $listsArray = Lists::where('idCreator','=',$creator->id)->get();
 
-        return $this->view->render($response, 'homeCo.twig', ["creator"=>$creator,  "listsArray"=>$listsArray] );
+        return $this->view->render($response, 'homeCo.twig', $this->tools->AddVarToRender(["creator"=>$creator, $_SESSION['createrCo'],  "listsArray"=>$listsArray] ));
     }
 
     public function disconnect(Request $request, Response $response, $args){

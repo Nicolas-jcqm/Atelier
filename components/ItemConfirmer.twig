@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mecado</title>
+    <link href="../../style/Mecado.css" rel="stylesheet">
+    <link href="../../style/scss/main.css" rel="stylesheet"> 
+</head>
+
+<body>
+{%include('header.twig')%}
+{%include('navbar.twig')%}
+    <div class="formulaire-item">
+        <form class="form-item"     action="{{ url }}" method="get">
+        <p>Votre item a été valider</p>
+        <input type="submit" name="Revenir à la liste" />
+    </form>
+    </div>
+</body>
+</html>

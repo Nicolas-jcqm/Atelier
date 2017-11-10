@@ -6,29 +6,12 @@
     <title>Mecado</title>
     <link href="style/Mecado.css" rel="stylesheet">
     <link href="style/scss/main.css" rel="stylesheet">
-
+</head>
 <body>
-<header>
-    <div class="header">
-        <div>
-            <h1>Mecado</h1>
-            <h6>Bonjour, {{ creator.name }} {{ creator.firstName }} !</h6>
-        </div>
 
-        <div  class="text-right btnLogNav ">
+{%include('header.twig')%}
+{%include('navbar.twig')%}
 
-            <a href="/disconnect" class="no-link btn-link btn-flat">Se deconnecter</a>
-
-        </div>
-    </div>
-
-</header>
-<nav>
-    <ul class="navbar bcg">
-        <li><a href="/creatList">Créer liste</a></li>
-        <li><a href="/homeCo">Visualiser liste</a></li>
-    </ul>
-</nav>
 
 <div>
     <h2 class="text-center" style="margin-top: 2%;">Vous pouvez créer votre liste, ici.</h2>
