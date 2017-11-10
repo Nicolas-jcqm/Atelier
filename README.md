@@ -46,10 +46,10 @@ $ php -S localhost:8000 -t public
 ```
 ###Groups
 
-Thibaud Grepin
-Nicolas Jacquemin
-Lucas Marquant
-Myriam Matmat
+- Thibaud Grepin
+- Nicolas Jacquemin
+- Lucas Marquant
+- Myriam Matmat
 
 ###That's it! Now go build something cool.
 
