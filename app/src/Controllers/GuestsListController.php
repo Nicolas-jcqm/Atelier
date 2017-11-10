@@ -60,9 +60,8 @@ class GuestsListController
             }
             $exist=true;
         }
-        var_dump($listItemNoBook);
         $comment= Comment::where('idlist','=',$listItemGuestsId->id)->latest()->get();
-        return $this->view->render($response, 'listGuest.twig', $this->tools->AddVarToRender(["url_form"=>$url_form,'erreurs'=>$erreurs=[],"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]));
+        return $this->view->render($response, 'listGuest.twig', $this->tools->AddVarToRender(["url_form"=>$url_form,'erreurs'=>$erreurArray,"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]));
 
     }
     public function bookItem(Request $request, Response $response, $args){
