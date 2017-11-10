@@ -80,10 +80,10 @@ final class ListeController
 
             if($checkbox === NULL){
 
-                $checkbox=4;
+                $checkbox=1;
 
             }else{
-                $checkbox=1;
+                $checkbox=0;
             }
 
             $list = new Lists();
@@ -142,9 +142,10 @@ final class ListeController
         $comment->id=uniqid();
         $comment->senderName=$request->getParsedBodyParam('senderName');
         $comment->content=$request->getParsedBodyParam('content');
-        $comment->idlist=$args['id'];
+        $liste=Lists::select('id')->where('token','=',$args["token"])->first();
+        $comment->idlist=$liste->id;
         $comment->save();
-        return $response->withRedirect($this->router->pathFor('itemview',["id"=>$args['id']]));
+        return $response->withRedirect($this->router->pathFor('viewGuest',["token"=>$args['token']]));
     }
 
     /* fontion qui permet d'effectuer une vérification sur la date de validite d'une liste

@@ -61,7 +61,6 @@ final class ItemController
         $creator = Creator::find($_SESSION['creatorCo']);
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
-        $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
         $liste = Lists::where("id","=", $args["id"])->first();
         $creator = Creator::find($_SESSION['creatorCo']);
         
@@ -79,7 +78,7 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
     }
     

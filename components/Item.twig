@@ -32,22 +32,35 @@
     {% if liste.isValidate %}
         {% if liste.token is null %}
             <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
-            Générez le token cadeau :
+            Générez le lien cadeau :
+            </button></a>
         {% else %}
             <a><button class='btn-secondary btn-flat'>
-            Donnez ce lien au bénéficiaire de la liste :
+            {% if liste.isRecipient %}
+                Voici votre lien de cadeau :
+            {% else %}
+                Donnez ce lien au bénéficiaire de la liste :
+            {% endif %}
+            </button></a>
+            <a href='/youreceivedgifts/{{liste.token}}'>Accès à la liste finale</a>
         {% endif %}
+        
+        
     {% else %}
         {% if liste.token is null %}
             <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
-            Générez votre token de partage :
+            Générez votre lien de partage :
+            </button></a>
         {% else %}
             <a><button class='btn-secondary btn-flat'>
-            Partagez ce lien à vos amis :
+            Partagez ce lien à vos amis : 
+            </button></a>
+            <a href='/viewGuest/{{liste.token}}'>Accès à la liste de participation</a>
         {% endif %}
     {% endif %}
-    </button></a>
-    <input type="text" value='{{liste.token}}' readonly>
+    
+
+
     {% if liste.isValidate==false %}
         <br><br>
         <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a>
@@ -100,9 +113,7 @@
             
             <button type="submit">Groupe les items sélectionners</button>
         </form>
-
     </div>
-    {%include('comment.twig')%}
 </body>
 
 </html>
