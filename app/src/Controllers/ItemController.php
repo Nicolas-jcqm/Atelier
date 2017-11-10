@@ -95,23 +95,13 @@ final class ItemController
 
                $Item->save();
 
-               $url = $this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]);
+                return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]));
 
-               $creator = Creator::find($_SESSION['creatorCo']);
-               $this->view->render($response, 'ItemConfirmer.twig', ["creator" => $creator, "url" => $url,'erreurs'=>$erreurArray]);
+
 
            }
            else{
-               $item = Item::where("idList","=",$args['id'])->get();
-               $url = $this->router->pathFor('itemadd');
-               $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
-               $liste = Lists::where("id","=", $args["id"])->first();
-               $creator = Creator::find($_SESSION['creatorCo']);
-
-               $formcrea = "aucun";
-               var_dump('bhhg');
-               $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea,'erreurs'=>$erreurArray]);
-
+               return $response->withRedirect($this->router->pathFor('itemview', ['erreurs'=>$erreurArray,"id" => $request->getParsedBodyParam("idform")]));
 
            }
        }        
