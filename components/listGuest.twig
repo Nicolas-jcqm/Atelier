@@ -35,12 +35,31 @@
         <div class="item">
             <div class="info-item">
                 <h4>{{ipo.title}}</h4>
-                <h6>Description :</h6>
-                <p>{{ipo.description}}</p>
-                <h6>Prix :</h6>
-                <p>{{ipo.price}} €</p>
-                <h6>Url :</h6>
-                <p>{{ ipo.url }}</p>
+                    
+                    <h6>Description :</h6>
+                    {% if ipo.description %}
+                        <p>{{ipo.description}}</p>
+                    {% else %}
+                        <p>Aucune description</p>
+                    {% endif %}
+                    
+                    <h6>Prix :</h6>
+                    <p>{{ipo.price}} €</p>
+                    
+                    <h6>Url :</h6>
+                    {% if ipo.url %}
+                        <p>{{ ipo.url }}</p>
+                    {% else %}
+                        <p>Aucune url</p>
+                    {% endif %}
+                    <h6>Groupe actuel :</h6>
+                    {% if ipo.idGroup %}
+                        <p class="colorGroup">{{ ipo.nameGroup }}
+                        <p class="sizeLow">({{ ipo.idGroup }})</p>
+                        </p>
+                    {% else %}
+                        <p>Aucun groupe</p>
+                    {% endif %}
             </div>
             <div class="info-img">
                 <img class="image-item" src="/img/{{ipo.picture}}">
