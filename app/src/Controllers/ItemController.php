@@ -49,10 +49,7 @@ final class ItemController
         
         $Item->save();
         
-        $url = $this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]);
-        
-        $creator = Creator::find($_SESSION['creatorCo']);
-        $this->view->render($response, 'ItemConfirmer.twig', ["creator" =>$creator, "url" =>$url]);
+        return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]));
         
         
     }
@@ -67,7 +64,7 @@ final class ItemController
         
         $formcrea = "aucun";
         
-        /*
+        
         if(isset($_SESSION['creatorCo'])){
             $CreaRequest = Lists::where("id", "=", $args['id'])->get(['idCreator']);
             if ($CreaRequest == $_SESSION['creatorCo']) {
@@ -77,7 +74,7 @@ final class ItemController
         var_dump($_SESSION['creatorCo']);
         var_dump($CreaRequest);
         var_dump($formcrea);
-        */
+        
         
         $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
