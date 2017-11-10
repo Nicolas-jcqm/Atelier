@@ -62,7 +62,7 @@ final class ItemController
         $item = Item::where("idList","=",$args['id'])->get();
         $url = $this->router->pathFor('itemadd');
         $comment= Comment::where('idlist','=',$args['id'])->latest()->get();
-
+        $liste = Lists::where("id","=", $args["id"])->first();
         $creator = Creator::find($_SESSION['creatorCo']);
         
         $formcrea = "aucun";
@@ -79,11 +79,30 @@ final class ItemController
         var_dump($formcrea);
         */
         
-        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
+        $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "listcom"=>$comment,"liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         
+    }
+    
+    public function groupItem(Request $request, Response $response, $args){
+       
+        var_dump($request->getParsedBodyParam("check"));
+        
+        $check = $request->getParsedBodyParam("check");
+        $idgroupGenerate = uniqid();
+        $size = count($check);
+        
+
+        for($i=0; $i < $size ; $i++){
+            Item::where('id', '=', $check[$i])->update(['idGroup' => $idgroupGenerate]);
+        }
+        
+        return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idlist")]));
     }
 
 
 
-    
- }
+
+
+
+
+}

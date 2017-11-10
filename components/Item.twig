@@ -26,8 +26,37 @@
             <li><a href="#">Partager liste</a></li>
         </ul>
     </nav>
+
+    <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
+    <br>
+    {% if liste.isValidate %}
+        {% if liste.token is null %}
+            <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
+            Générez le token cadeau :
+        {% else %}
+            <a><button class='btn-secondary btn-flat'>
+            Donnez ce lien au bénéficiaire de la liste :
+        {% endif %}
+    {% else %}
+        {% if liste.token is null %}
+            <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
+            Générez votre token de partage :
+        {% else %}
+            <a><button class='btn-secondary btn-flat'>
+            Partagez ce lien à vos amis :
+        {% endif %}
+    {% endif %}
+    </button></a>
+    <input type="text" value='{{liste.token}}' readonly>
+    {% if liste.isValidate==false %}
+        <br><br>
+        <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a>
+    {% endif%}
+    <br><br>
+
+
     <div class="formulaire-item">
-        <form class="form-item"enctype="multipart/form-data" action="{{ url }}" method="post">
+        <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
             <input type="text" name="title" />
             <p>Description :</p>
@@ -46,24 +75,32 @@
 
     <h2 class="text-center">Voici vos items</h2>
     <div class="container-item">
-
-        {% for ipo in item %}
-        <div class="item">
-            <div class="info-item">
-                <h4>{{ipo.title}}</h4>
-                <h6>Description :</h6>
-                <p>{{ipo.description}}</p>
-                <h6>Prix :</h6>
-                <p>{{ipo.price}} €</p>
-                <h6>Url :</h6>
-                <p>{{ ipo.url }}</p>
+        <form action="/group_item" method="post">
+            {% for ipo in item %}
+            <div class="item">
+                <div class="info-item">
+                    <h4>{{ipo.title}}</h4>
+                    <h6>Description :</h6>
+                    <p>{{ipo.description}}</p>
+                    <h6>Prix :</h6>
+                    <p>{{ipo.price}} €</p>
+                    <h6>Url :</h6>
+                    <p>{{ ipo.url }}</p>
+                    <h6>Groupe actuel :</h6>
+                    <p>{{ ipo.idGroup }}</p>
+                    <label>Groupe cette item :</label>
+                    <input type="checkbox" name="check[]" value="{{ ipo.id }}">
+                    <input type="hidden" name="idlist" value="{{ ipo.idList }}">
+                </div>
+                <div class="info-img">
+                    <img class="image-item" src="/img/{{ipo.picture}}">
+                </div>
             </div>
-            <div class="info-img">
-                <img class="image-item" src="/img/{{ipo.picture}}">
-            </div>
-        </div>
+            {% endfor %}
+            
+            <button type="submit">Groupe les items sélectionners</button>
+        </form>
 
-        {% endfor %}
     </div>
     {%include('comment.twig')%}
 </body>
