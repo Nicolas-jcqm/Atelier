@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `picture` varchar(50) NOT NULL,
   `idGroup` varchar(100) NOT NULL,
   `idList` varchar(100) NOT NULL,
-  `nameGroup` varchar(100) NOT NULL,
+  `nameGroup` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_item_idList` (`idList`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

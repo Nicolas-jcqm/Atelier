@@ -148,7 +148,7 @@ final class UserController
         $creator = Creator::find($_SESSION['creatorCo']);
         $listsArray = Lists::where('idCreator','=',$creator->id)->get();
 
-        return $this->view->render($response, 'homeCo.twig', $this->tools->AddVarToRender(["creator"=>$creator, $_SESSION['createrCo'],  "listsArray"=>$listsArray] ));
+        return $this->view->render($response, 'homeCo.twig', $this->tools->AddVarToRender(["creator"=>$creator,"listsArray"=>$listsArray] ));
     }
 
     public function disconnect(Request $request, Response $response, $args){

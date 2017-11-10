@@ -69,14 +69,12 @@ final class ItemController
                    array_push($erreurArray,$erreurPriceFiltre);
                }
            }
-           if(empty($url)){
-               $erreurUrl="Merci d'entrer une url";
-               array_push($erreurArray,$erreurUrl);
-           }else{
+
+
                if($url != filter_var($url,   FILTER_VALIDATE_URL)){
                    $erreurUrlFiltre ="Merci d'entrer une url valide";
                    array_push($erreurArray,$erreurUrlFiltre);
-               }
+
            }
            if (sizeof($erreurArray)===0) {
 
@@ -96,18 +94,12 @@ final class ItemController
                    move_uploaded_file($_FILES['FTU'] ['tmp_name'], 'img/' . $nomdate . '.' . $ext);
                    $Item->picture = $nomdate . '.' . $ext;
                }
-
                $Item->save();
                 // $this->view->render($response, 'ItemConfirmer.twig', $this->tools->AddVarToRender(["creator" =>$creator, "url" =>$url]));
                 return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idform")]));
-
-
-
            }
            else{
-
                return $response->withRedirect($this->router->pathFor('itemview', ['erreurs'=>$erreurArray,"id" => $request->getParsedBodyParam("idform")]));
-
            }
        }
     }

@@ -71,7 +71,6 @@ final class ListeController
 
         $parsedBody = $request;
         $erreurArray=array();
-        var_dump('ok',$parsedBody->getParsedBodyParam('checkbox'));
 
         if(isset($parsedBody) && $parsedBody->getParsedBodyParam('envoi') === "Envoyer" ){
             $title=$parsedBody->getParsedBodyParam('title');
@@ -187,6 +186,8 @@ final class ListeController
     * si la date est passee, efface le token correspondant a la liste
     * renvoi true si la liste est validée
     * renvoi false si la liste n'est pas encore validée
+     *
+     * fonction destiné à etre lancé par le serveur tout les jours /!\
     */
     public function checkAndUpValidityDate(Request $request, Response $response, $args){
         $liste=Lists::where("id","=",$args['id'])->first();
