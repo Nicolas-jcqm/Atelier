@@ -66,15 +66,11 @@ final class ItemController
         
         
         if(isset($_SESSION['creatorCo'])){
-            $CreaRequest = Lists::where("id", "=", $args['id'])->get(['idCreator']);
-            if ($CreaRequest == $_SESSION['creatorCo']) {
+            $CreaRequest = Lists::where("id", "=", $args['id'])->first(['idCreator']);
+            if ($CreaRequest->idCreator == $_SESSION['creatorCo']) {
                 $formcrea = "ok";
             }
         }
-        var_dump($_SESSION['creatorCo']);
-        var_dump($CreaRequest);
-        var_dump($formcrea);
-        
         
         $this->view->render($response, 'item.twig', ["creator" =>$creator, "item" =>$item, "liste"=>$liste,"url" =>$url, "idlist" =>$args['id'], "formcrea" => $formcrea]);
         

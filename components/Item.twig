@@ -50,8 +50,8 @@
     <br><br>
     <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a> {% endif%}
     <br><br>
-
-
+    
+    {% if formcrea == 'ok' %}
     <div class="formulaire-item">
         <form class="form-item" enctype="multipart/form-data" action="{{ url }}" method="post">
             <p>Titre :</p>
@@ -65,10 +65,14 @@
             <input type="hidden" name="idform" value="{{ idlist }}" />
             <input type="file" name="FTU" />
             <input type="submit" name="valid" value="valider" />
-
-
         </form>
     </div>
+    
+    {% else %}
+    <div class="itemlogoff">
+        <p>Vous devez etre connecté en tant que créateur pour ajouter des items la liste de cadeau</p>
+    </div>
+    {% endif %}
 
     <h2 class="text-center">Voici vos items</h2>
     <div class="container-item">
