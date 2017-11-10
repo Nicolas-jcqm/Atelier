@@ -68,8 +68,13 @@
             </form>
         </div>
     {% endfor %}
+    <div>
+    
+    </div>
 </div>
-
+    {%include('/comment/commentform.twig')%} 
+    <!-- necessite d'avoir la liste disponible avec render sous 'comment'=liste commentaires --> 
+    {%include('/comment/commentliste.twig')%}
 </body>
 
 </html>

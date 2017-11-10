@@ -11,6 +11,7 @@ namespace App\Controllers;
 use App\Models\Item;
 use App\Models\Lists;
 use App\Models\Booking;
+use App\Models\Comment;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -60,7 +61,8 @@ class GuestsListController
 
         }
         var_dump($listItemNoBook);
-        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],$args,"item"=>$listItemNoBook]);
+        $comment= Comment::where('idlist','=',$listItemGuestsId->id)->latest()->get();
+        return $this->view->render($response, 'listGuest.twig', ["url_form"=>$url_form,'erreurs'=>$erreurs=[],"args"=>$args['token'], "comment"=>$comment,"item"=>$listItemNoBook]);
 
     }
     public function bookItem(Request $request, Response $response, $args){

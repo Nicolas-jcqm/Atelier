@@ -1,7 +1,5 @@
-<div>
-    <h2 class="text-center" style="margin-top: 2%;">Partagez ici.</h2>
-
-    <form action="addComment" method="post">
+<h2 class="text-center" style="margin-top: 2%;">Commentez ici</h2>
+<form action='{{args}}/addComment' method="post">
     <ul class="form-style-1">
         <li>
             <label for="senderName">Votre pseudonyme</label>
@@ -16,11 +14,3 @@
         </li>
     </ul>
 </form>
-    <div>
-        {% for com in listcom %}
-            Nom: {{com.senderName}}<br>
-            Message: {{com.content}}<br>
-            Posté le {{com.created_at|date('d/m/Y')}} à {{com.created_at|date_modify('+ 1 hour')|date('H:i:s')}} (UTC+1)<br><br>
-        {% endfor %}
-    </div>
-</div>
