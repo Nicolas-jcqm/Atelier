@@ -1,8 +1,7 @@
-# Boilerplate for Slim Framework 3 [![Build Status](https://travis-ci.org/zhiephie/boilerplate-slim3.svg?branch=master)](https://travis-ci.org/zhiephie/boilerplate-slim3) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=purwantoyudi42%40gmail%2ecom&lc=ZA&item_name=Timex%20Studio&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-  Boilerplate for getting started with Slim Framework
+# Project mecado
+  with Boilerplate for Slim Framework 3 to https://github.com/zhiephie/boilerplate-slim3.git
   
-  Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3.
-  
+ 
 ###Requirements:
 - PHP 5.5 or newer
 - PDO PHP Extension
@@ -14,15 +13,13 @@
 - Twig Template Engine
 - Eloquent Laravel
 - Sentinel Authentication provider
-- Include SDK Facebook
-- Logger Monolog
-- AdminLTE soon
+
 
 
 #####1 Manual Install
 You can manually install by cloning this repo or download the zip file from this repo, and run ```composer install```.
 ```
-$ git clone https://github.com/zhiephie/boilerplate-slim3.git
+$ https://github.com/Nicolas-jcqm/Atelier
 $ composer install
 ```
 
@@ -41,14 +38,19 @@ $ chmod 666 config/database.php
 #####4 Configuration Database and Setting App
 Configuration file located in ```config```, edit the database.php, setting.php
 
-#####5 Run ```php migrate```
-```
-$ php migrate
-```
+Import data base wich is in the folder bdd/ in your phpmyadmin
 
 #####6 Run Server  ```php -S localhost:8000 -t public```
 ```
 $ php -S localhost:8000 -t public
 ```
+###Groups
+
+Thibaud Grepin
+Nicolas Jacquemin
+Lucas Marquant
+Myriam Matmat
 
 ###That's it! Now go build something cool.
+
+
