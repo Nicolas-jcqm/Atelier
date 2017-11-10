@@ -34,6 +34,7 @@ final class ItemController
         $Item->url = $request->getParsedBodyParam("url");
         $Item->idList = $request->getParsedBodyParam("idform");
         $Item->idGroup = 0;
+        $Item->nameGroup = '';
         $Item->picture = 'default.jpg';
         
         if (isset($_FILES['FTU']) AND $_FILES['FTU'] ['error'] == 0){
@@ -85,7 +86,7 @@ final class ItemController
     public function groupItem(Request $request, Response $response, $args){
        
         var_dump($request->getParsedBodyParam("check"));
-        
+        $nameGroup = $request->getParsedBodyParam("nameGroup");
         $check = $request->getParsedBodyParam("check");
         $idgroupGenerate = uniqid();
         $size = count($check);
@@ -93,15 +94,9 @@ final class ItemController
 
         for($i=0; $i < $size ; $i++){
             Item::where('id', '=', $check[$i])->update(['idGroup' => $idgroupGenerate]);
+            Item::where('id', '=', $check[$i])->update(['nameGroup' => $nameGroup]);
         }
         
         return $response->withRedirect($this->router->pathFor('itemview', ["id" => $request->getParsedBodyParam("idlist")]));
     }
-
-
-
-
-
-
-
 }

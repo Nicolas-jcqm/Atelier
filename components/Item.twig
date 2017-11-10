@@ -28,43 +28,27 @@
     </nav>
 
     <!-- Permet de generer le bouton de création de token selon si la liste est validée (genere token pour beneficiaire) ou non validée (pour les participants) -->
-    <br>
-    {% if liste.isValidate %}
-        {% if liste.token is null %}
-            <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
+    <br> {% if liste.isValidate %} {% if liste.token is null %}
+    <a href="generateSharingFinalToken"><button class='btn-secondary btn-flat'>
             Générez le lien cadeau :
-            </button></a>
-        {% else %}
-            <a><button class='btn-secondary btn-flat'>
+            </button></a> {% else %}
+    <a><button class='btn-secondary btn-flat'>
             {% if liste.isRecipient %}
                 Voici votre lien de cadeau :
             {% else %}
                 Donnez ce lien au bénéficiaire de la liste :
             {% endif %}
             </button></a>
-            <a href='/youreceivedgifts/{{liste.token}}'>Accès à la liste finale</a>
-        {% endif %}
-        
-        
-    {% else %}
-        {% if liste.token is null %}
-            <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
+    <a href='/youreceivedgifts/{{liste.token}}'>Accès à la liste finale</a> {% endif %} {% else %} {% if liste.token is null %}
+    <a href="generateSharingToken"><button class='btn-secondary btn-flat'>
             Générez votre lien de partage :
-            </button></a>
-        {% else %}
-            <a><button class='btn-secondary btn-flat'>
+            </button></a> {% else %}
+    <a><button class='btn-secondary btn-flat'>
             Partagez ce lien à vos amis : 
             </button></a>
-            <a href='/viewGuest/{{liste.token}}'>Accès à la liste de participation</a>
-        {% endif %}
-    {% endif %}
-    
-
-
-    {% if liste.isValidate==false %}
-        <br><br>
-        <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a>
-    {% endif%}
+    <a href='/viewGuest/{{liste.token}}'>Accès à la liste de participation</a> {% endif %} {% endif %} {% if liste.isValidate==false %}
+    <br><br>
+    <a href="ValidateList"><button class='btn-warning btn-flat'>Cloturer la liste en avance</button></a> {% endif%}
     <br><br>
 
 
@@ -93,14 +77,30 @@
             <div class="item">
                 <div class="info-item">
                     <h4>{{ipo.title}}</h4>
+                    
                     <h6>Description :</h6>
-                    <p>{{ipo.description}}</p>
+                    {% if ipo.description %}
+                        <p>{{ipo.description}}</p>
+                    {% else %}
+                        <p>Aucune description</p>
+                    {% endif %}
+                    
                     <h6>Prix :</h6>
                     <p>{{ipo.price}} €</p>
+                    
                     <h6>Url :</h6>
-                    <p>{{ ipo.url }}</p>
+                    {% if ipo.url %}
+                        <p>{{ ipo.url }}</p>
+                    {% else %}
+                        <p>Aucune url</p>
+                    {% endif %}
                     <h6>Groupe actuel :</h6>
-                    <p>{{ ipo.idGroup }}</p>
+                    {% if ipo.idGroup %}
+                        <p class="colorGroup">{{ ipo.nameGroup }}({{ ipo.idGroup }})</p>
+                    {% else %}
+                        <p>Aucun groupe</p>
+                    {% endif %}
+                    
                     <label>Groupe cette item :</label>
                     <input type="checkbox" name="check[]" value="{{ ipo.id }}">
                     <input type="hidden" name="idlist" value="{{ ipo.idList }}">
@@ -110,8 +110,11 @@
                 </div>
             </div>
             {% endfor %}
-            
-            <button type="submit">Groupe les items sélectionners</button>
+            <div class="groupform">
+                <p>Nom du groupe :</p>
+                <input type="text" name="nameGroup" />
+                <button type="submit">Groupe les items sélectionners</button>
+            </div>
         </form>
     </div>
 </body>
